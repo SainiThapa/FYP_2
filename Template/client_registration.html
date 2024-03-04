@@ -1,0 +1,94 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Client Registration</title>
+</head>
+<body>
+    <h2>Client Registration</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Register</button>
+    </form>
+    {%for message in messages%}
+        <h3>{{message}}</h3>
+        {%endfor%}
+</body>
+</html>
+
+
+ <!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel = "icon" href = "https://i.pinimg.com/originals/41/87/16/4187161da25587f50704458a6a93c9df.jpg" type = "image/x-icon">
+    <link rel="stylesheet" href="{%static 'css/register.css'%}">
+</head>
+<body>
+    <div class="body">
+        <div class="box">
+            <h1>New Account? Sign up now !!</h1>
+            <div class="signin">
+                or <a href="/accounts/login"><div class="login">Login</div></a> 
+             </div>
+            <div class="form">
+                <form enctype="multipart/form-data" method="POST">
+                    {% csrf_token %}
+                    <div class="label">
+                        <label for="name">Username</label><br>
+                        <input type="text" name="firstname" placeholder="Your Name"> <br>
+                    </div>
+
+                    <div class="label">
+                        <label for="Profile_picture">Profile_picture</label><br>
+                    <input type="file" id="123" name="profile_picture" accept="image/*" placeholder="Your pic here">
+                    <button type="button" onclick="imgclear()">Remove</button>
+                    <Script>function imgclear(){document.getElementById('123').value='';}</Script>
+                    <br>
+                    </div>
+                    
+                    <div class="label">
+                        <label for="Location">Location</label><br>
+                    <input type="text" name="location" placeholder="Location"> <br>
+                    </div>
+                
+                    <div class="label">
+                    <label for="User Name">Phone</label><br>
+                    <input type="number" name="Phone" placeholder=""> <br>
+                </div>
+                
+                <div class="label">
+                    <label for="email">Email Address</label><br>
+                    <input type="email" name="email" placeholder="Email"> <br>
+                </div>
+                
+                <div class="label">
+                    <label for="password1">Password</label><br>
+                    <input type="password" name="password1" placeholder="Password"> <br>
+                </div>
+                <div class="label">
+                    <label for="password2">Confirm your password</label><br>
+                    <input type="password" name="password2" placeholder="Re-enter your password"> <br><br>
+                </div>
+                <div class="submit">
+                    <input type="submit" value="Register">
+                </div>
+            </form>
+        </div>
+    <div class="message">
+        {%for message in messages%}
+        <h3>{{message}}</h3>
+        {%endfor%}
+    </div>
+</div>
+</body>
+</html> -->

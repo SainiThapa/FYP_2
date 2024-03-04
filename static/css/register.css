@@ -1,0 +1,59 @@
+body{
+    background-color: #08f2bb;
+}
+h1{
+  /* margin-left5%; */
+    font-size: 35px;
+}
+.box{
+    margin: 3% 32%;
+}
+.form{
+    padding: 4px 3px;
+    background-color: rgb(243, 229, 223);
+    border: 1px solid black;
+    box-shadow: 3px 2px grey;
+    transition: 0.5s;
+}
+.form:hover{
+    transform: translateY(-5px);
+}
+.label{
+    margin: 15px 20%;
+    font-size: 28px;
+}
+input{
+    background-color: rgb(255, 255, 255);
+
+    margin-top: 5px;
+    font-size: 22px;
+}
+.submit{
+    margin-left: 38%;
+    margin-top: -15px;
+    margin-bottom: 15px;
+}
+.message{
+    position: relative;
+    text-align: center;
+    font-size: 28px;
+    color: rgb(198, 0, 0);
+    margin: -15px;
+}
+.signin{
+    font-size: 25px;
+    position: absolute;
+    margin: 20% 0% 0px 40%;
+}
+.login{
+    position: absolute;
+    border: 1px solid black;
+    background-color: rgba(227, 248, 111, 0.862);
+    margin: -35px 50px;
+    font-size: 32px;
+    color: black;
+    transition: 0.5s;
+}
+.login:hover{
+    transform: translateY(-5px);
+}
