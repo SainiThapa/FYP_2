@@ -10,7 +10,7 @@ h1{
 }
 .form{
     padding: 4px 3px;
-    background-color: rgb(243, 229, 223);
+    background-color: rgb(168, 220, 244);
     border: 1px solid black;
     box-shadow: 3px 2px grey;
     transition: 0.5s;
@@ -20,7 +20,7 @@ h1{
 }
 .label{
     margin: 15px 20%;
-    font-size: 28px;
+    font-size:  18px;
 }
 input{
     background-color: rgb(255, 255, 255);
@@ -37,8 +37,8 @@ input{
     position: relative;
     text-align: center;
     font-size: 28px;
-    color: rgb(198, 0, 0);
-    margin: -15px;
+    color: rgb(228, 40, 40);
+    margin: -35px;
 }
 .signin{
     font-size: 25px;

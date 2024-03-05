@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/071ff2c21e.js" crossorigin="anonymous"></script>
+    <title>Log In</title>
+    <link rel = "icon" href = "https://i.pinimg.com/originals/41/87/16/4187161da25587f50704458a6a93c9df.jpg" type = "image/x-icon">
+
+    <link rel="stylesheet" href="{%static 'css/loginpage.css'%}">
+</head>
+<body>
+    <div class="header">
+        <!-- <a href="/"><img src="{%static 'img/logo.png'%}"></a> -->
+        
+        <div class="text1">
+            <i class="fa-sharp fa-solid fa-square-info"></i> You must log in to continue.</div>
+    </div>
+    <div class="form">
+        <form method="post">
+            {% csrf_token %}
+            <div class="text">Log in to K-Merch Nepal</div>
+                <div class="Title">
+                    <label for="name">Enter your Username</label>
+                </div>
+                <div>
+                    <input type="text" name="name" placeholder="Username">
+                </div>
+                <div class="Title">
+                    <label for="password">Enter your Password</label>
+                </div>
+                <div>
+                    <input type="password" name="password" placeholder="Password">
+                </div>
+                <div class="Input">
+                    <button>Log In</button>
+                </div>
+            </form> 
+        </div>
+        <div class="footer">
+            <form action="signup">
+                or
+                <a href="/signup"><div class="button">Create new account</div></a>
+            </form>
+            {%for message in messages%}
+            <h3>{{message}}</h3>
+            {%endfor%}
+        </div>
+</body>
+</html>

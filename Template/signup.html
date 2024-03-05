@@ -1,3 +1,4 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,19 +7,15 @@
     <title>Signup</title>
 </head>
 <body>
-    <h2>Signup</h2>
-    <form method="post" enctype="multipart/form-data">
+    <!-- {%include "auth/nav_bar.html"%} -->
+    <h2>Choose user type: </h2>
+    <form action="{% url 'choose_user_type' %}" method="post">
         {% csrf_token %}
         <label><input type="radio" name="user_type" value="client"> Client</label>
+        <br>
         <label><input type="radio" name="user_type" value="lawyer"> Lawyer</label>
-        <br><br>
-        {{ form.as_p }}
-
-        {%if 1%}
-        <button type="submit">Sign up</button>
-        {%else%}
-        <a href><button type="submit">Sign up</button></a>
-
+        <br>
+        <button type="submit">Submit</button>
     </form>
 </body>
 </html>
