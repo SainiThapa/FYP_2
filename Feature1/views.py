@@ -8,9 +8,6 @@ def handle_404(request, exception):
 def login(request):
     return render(request, 'auth/signin_form.html')
 
-def index(request):
-    return render(request,"index.html")
-
 def signup(request):
     return render(request,"signup.html")
 
@@ -22,3 +19,16 @@ def choose_user_type(request):
         elif user_type == 'client':
             return redirect('/account/register/client')
     return render(request, 'choose.html')
+
+
+def index(request):
+    return render(request,"index.html",{'active': 'home'})
+
+def contact(request):
+    return render(request,"contact.html",{'active': 'contact'})
+
+def log(request):
+    return render(request,"log.html",{'active': 'log'})
+
+def help(request):
+    return render(request,"help.html",{'active': 'about'})

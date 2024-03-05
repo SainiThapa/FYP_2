@@ -15,9 +15,9 @@ def signup(request):
 
 def log_in(request):
     if request.method=='POST':
-        username=request.POST.get('name','default value')
+        name=request.POST.get('name','default value')
         password=request.POST.get('password','default value')
-        user=auth.authenticate(username=username,password=password)
+        user=auth.authenticate(username=name,password=password)
         if user is not None:
             # User found and password matches, log in the user
             auth.login(request, user)
@@ -77,11 +77,51 @@ def client_registration(request):
                                 return redirect('/login')
             else:
                 messages.info(request,"Password doesnot match !!")
-                return redirect('client_registration')
+                return redirect('account/register/client')
     return render(request,"client_registration.html")
     
 def lawyer_registration(request):
-    
+    if request.method=="POST":
+        Lawyername=request.POST.get("name")
+        location=request.POST.get('location')
+        email=request.POST.get('email')
+        profile_picture=request.POST.get('profile_picture')
+        phone=request.POST.get('phone')
+        password1=request.POST.get('password1')
+        password2=request.POST.get('password2')
+        specialization_tags=request.POST.get('specialization_tags')
+        profile_description=request.POST.get('profile_description')
+
+        # License
+        license_no=request.POST.get('license_no')
+        license_img=request.POST.get('license_img')
+        license_location=request.POST.get('license_location')
+
+        # Academic
+        academic_degree=request.POST.get('academic_degree')
+        completion_year=request.POST.get('completion_year')
+        major_subject=request.POST.get('major_subject')
+
+        if Lawyername=='' or phone=='' or email=='' or location=='' or password1=='' or password2=='' or profile_picture=="" or profile_description=="" or specialization_tags=="" or license_no=="" or license_location=="" or academic_degree=="" or completion_year=="" or major_subject=="":
+            messages.error(request,"Make sure to fill all the boxes !!")
+            # return redirect('/account/register/lawyer')
+        else:
+             if password1==password2:
+                  if User.objects.filter(email=email).exists():
+                       messages.error(request,"Email already in use !!")
+                       return redirect("/account/register/lawyer")
+                  else:
+                    lawyer=Lawyer.objects.create(username=Lawyername,email=email,password=password1,
+                    profile_picture=profile_picture,location=location,phone=phone,license_no=license_no,license_img=license_img,license_location=license_location,academic_degree=academic_degree,completion_year=completion_year,major_subject=major_subject)
+                    lawyer.save()
+                    if(Lawyer.license_verify_status):
+                        user=User.objects.create_user(username=Lawyername,email=email,password=password1)
+                        user.save()
+                    print('LAWYER CREATED !')
+                    return redirect('/login')
+             else:
+                  messages.error(request,"Password donot match, Try Again !")
+                  return redirect('/account/register/lawyer')                                                                  
     return render(request,"lawyer/Signup.html")
 
 

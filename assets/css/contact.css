@@ -1,0 +1,13 @@
+body{
+    background-color: rgb(249, 245, 241);
+}
+
+.boxContact{
+    margin-right: auto ;
+    margin-left: auto;
+    padding: 2%;
+    height:max-content;
+    width: 50%;
+    /* border: 2px 1px solid black; */
+    background-color: antiquewhite;
+}

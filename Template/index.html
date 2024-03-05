@@ -1,10 +1,160 @@
-{%load static%}
-<h1>HomePage</h1>
+<!DOCTYPE html>
+<html lang="en">
+  {%load static%}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="{%static 'js/slider.js'%}"></script>
+  <script src="https://kit.fontawesome.com/your-font-awesome-kit-id.js" crossorigin="anonymous"></script>
+  <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
+  <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <title>Homepage</title>
+</head>
+<body>
+    <!-- HEADER NAVIGATION BAR  -->
+  <div class="card text-center ">
+        <div class="card-header ">
+          <ul class="nav nav-tabs card-header-tabs justify-content-end"> 
+            <li class="nav-item" style="margin-right:40%; font-family:'palatino linotype';">
+            <a class="nav-link" href="/" style="display:block; color:#000;">
+              <!-- <img src="{%static 'img/logo.png'%}" width="60%" alt=""> -->
+ <h5><i><strong>Lawyer Management System</strong></i>
+ </h5>       </a></li>
+            <li class="nav-item">
+              <a class="nav-link {% if active == 'home' %}active{% endif %}" href="/home">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link  {% if active == 'help' %}active{% endif %}" href="/about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link  {% if active == 'contact' %}active{% endif %}" href="/contact">Contact Us</a>
+            </li>
+            {%if user.is_authenticated%}
+            <li class="nav-item" style="margin-right:10%;">
+              <a class="nav-link" href="/account/logout">Logout</a>
+            </div>
+            
+              </li>
+              {%else%}            
+              <li class="nav-item" style="margin-right:10%;">
+              <a class="nav-link  {% if active == 'log' %}active{% endif %}" href="/account/login">Login/Sign Up</a>
+            </div>
+              </li>
+              {%endif%}
+
+          </ul>
+        <!-- <div class="card-body">
+          <h5 class="card-title">This is the homepage</h5>
+          <p class="card-text">Below exists the image we are trying to load</p>
+          <img src="{%static 'img/pic1.jpg'%}" class="img-fluid" alt="ALT.img">
+          <br><a href="#" class="btn btn-primary">Go somewhere</a>
+        </div> -->
+      </div>
+<!-- BODY HERE -->
 {%block content%}
-{%if user.is_authenticated%}
-<h1>welcome to the homepage</h1>
-<h3><a href="account/logout">Logout</a></h3>
-{%else%}
-<h2><a href="account/login">Login</a> or <a href="/signup">Signup</a></h2>     
-{%endif%}
+<!-- Carousel -->
+
+<div id="carouselExample" class="carousel slide">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{%static 'img/123_1.jpg'%}" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="{%static 'img/law.jpg'%}" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="{%static 'img/Emblem.jpg'%}" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<!-- End of carousel -->
+
+<!-- Text box with image -->
+<!-- <div class="container mt-5 justify-content-center">
+  <div class="card" style="width: 18rem;">
+      <img src="{%static 'img/pic2.webp'%}" class="card-img-top" alt="Image">
+      <div class="card-body">
+          <h5 class="card-title">Card Title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      </div>
+  </div>
+  
+</div> -->
+<br><br>
+<t t-name="website.home">
+  <t t-call="website.layout">
+      <div id="wrap" class="oe_structure oe_empty"><section class="s_text_image pt80 pb80 o_colored_level o_cc o_cc2" data-snippet="s_image_text" data-name="Image - Text" style="background-image: none;">
+      <div class="container">
+          <div class="row align-items-center">
+              <div class="col-lg-6 o_colored_level pb0 pt0">
+                  <a href="/log"><img src="{%static 'img/pic2.webp'%}" alt="" class="img img-fluid mx-auto o_we_custom_image o_animate_on_hover img-thumbnail" style="padding: 15px;" data-mimetype="image/svg+xml" data-original-id="2489" data-original-src="/web/image/2489-cd6adc50/pic2.webp" data-mimetype-before-conversion="image/webp" data-resize-width="690" data-shape="web_editor/geometric/geo_square" data-file-name="pic2.svg" data-hover-effect="image_zoom_in" data-shape-colors=";;;;" data-original-mimetype="image/webp" data-hover-effect-intensity="20" data-hover-effect-color="rgba(0, 0, 0, 0)"/></a>
+              </div>
+              <div class="col-lg-6 pt16 pb16 o_colored_level">
+                  <h2>Find the best lawyer for you<br/></h2>
+                  <p>We provide the system to recommend you the best and most relevant lawyers and attorneys to you related to your specific information and reasoning.<br/></p>
+                  <p class="o_default_snippet_text">Log in to know and find more about the services.<br/></p>
+      <p><br/></p>
+                  <p><a href="/log" class="oe_edited_link btn btn-secondary" data-bs-original-title="" title="" aria-describedby="popover928516">Login</a><br/></p>
+              </div>
+          </div>
+      </div>
+  </section></div>
+  </t>
+</t>
+
+<!-- FOOTER -->
+
+<style>
+  /* Add your custom styles here */
+  footer {
+      background-color: #000;
+      color: #fff;
+      padding: 20px 0;
+  }
+
+  .social-icons a {
+      color: #fff;
+      margin-right: 15px;
+  }
+</style>
+<div class="container">
+<!-- Your content goes here -->
+</div>
+
+<footer class="text-center">
+<div class="social-icons">
+  <a href="https://www.facebook.com/hanbin.magar" target="_blank"><i class="fa-brands fa-facebook"></i> Facebook</a>
+  <a href="https://www.twitter.com" target="_blank"><i class="fa-brands fa-twitter"></i>Twitter </a>
+  <a href="https://www.instagram.com/priz_47" target="_blank"><i class="fa-brands fa-square-instagram"></i>Instagram</a>
+  <!-- Add more social media icons as needed -->
+</div>
+<p>&copy; www.lawyerrecommendationsystem.com</p>
+</footer>
+
+<!-- FOOTER -->
+
 {%endblock%}
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-GLhlTQ8iEETHSmAK6GO9TU7GUgMwsM5O8F7XT5nfgicOMLZCUXdGj3MEKiSbO6jC" crossorigin="anonymous">
+
+  <!-- Bootstrap JS and Popper.js -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyL/K5V8e5W5gBOn//6uUvoys87hub4N2J" crossorigin="anonymous"></script>   -->
+  <script>window.jQuery || document.write('<script src="{% static "js/jquery-3.5.1.slim.min.js" %}"><\/script>')</script>
+</body>
+</html>

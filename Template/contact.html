@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/your-font-awesome-kit-id.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{%static 'css/contact.css'%}">
+    <title>Help</title>
+</head>
+<body>
+  <div class="card text-center ">
+    <div class="card-header ">
+      <ul class="nav nav-tabs card-header-tabs justify-content-end"> 
+        <li class="nav-item" style="margin-right:40%; font-family:'palatino linotype';">
+        <a class="nav-link" href="/" style="display:block; color:#000;">
+          <!-- <img src="{%static 'img/logo.png'%}" width="60%" alt=""> -->
+<h5><i><strong>Lawyer Management System</strong></i>
+</h5>       </a></li>
+        <li class="nav-item">
+          <a class="nav-link {% if active == 'home' %}active{% endif %}" href="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link  {% if active == 'help' %}active{% endif %}" href="/about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link  {% if active == 'contact' %}active{% endif %}" href="/contact">Contact Us</a>
+        </li>
+        <li class="nav-item" style="margin-right:10%;">
+          <a class="nav-link  {% if active == 'log' %}active{% endif %}" href="/account/login">Login/Sign Up</a>
+          </li>
+      </ul>
+        </div> 
+        <!-- <div class="card-body">
+          <h1 class="card-title">This is a contact page</h1>
+          <a href="home" class="btn btn-primary">Home page</a>
+        </div> -->
+        
+      </div>  
+        
+      <div class="boxContact">
+
+        <div style="padding:0 25%;">
+          <div class="card-header">
+          <h1 style="margin-top: 5%; margin-left:25%"> <b>Contact Us</b></h1>
+          <br>
+          <p style="text-align: center;">You can send queries related to our website below. <br>
+            Check our contact information in the bottom of our page.</p>
+          </div>
+        </div>
+
+        <!-- Contact Page -->
+        
+        <div class="container mt-5">
+          <div class="row justify-content-center">
+              <div class="col-md-6">
+      
+                  <form action="#" method="post">
+      
+                      <div class="form-group">
+                          <label for="name">Name<span style="color:red">*</span></label>
+                          <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
+                      </div>
+                      <br>
+                      <div class="form-group">
+                          <label for="phone">Phone Number<span style="color:red">*</span></label>
+                          <input type="tel" class="form-control" id="phone" name="phone" placeholder="+977-XXXXXXXXXX" required>
+                      </div>
+                      <br>
+                      <div class="form-group">
+                          <label for="email">Email<span style="color:red">*</span></label>
+                          <input type="email" class="form-control" id="email" placeholder="example@gmail.com" name="email" required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                          <label for="exampleFormControlSelect1">Select your age</label>
+                          <select class="form-control" id="exampleFormControlSelect2" required>
+                          <option disabled selected value="">Select an option</option>
+                          <option value="1">18-25</option>
+                          <option value="2">25-35</option>
+                          <option value="3">35-45</option>
+                          <option value="4">45-60</option>
+                          <option value="5">60+</option>
+                        </select>
+                      </div>
+                      <br>
+                      <div class="form-group">
+                          <label for="subject">Subject<span style="color:red">*</span></label>
+                          <input type="text" class="form-control" id="subject" name="subject" required>
+                      </div>
+                      <br>
+                      <div class="form-group">
+                          <label for="question">Question<span style="color:red">*</span></label>
+                          <textarea class="form-control" id="question" name="question" rows="3" required></textarea>
+                      </div>
+                      <br><br>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                      
+                  </form>
+      
+              </div>
+          </div>
+        </div>
+      </div>
+        <!-- End of contact -->
+        
+        <!-- Footer here -->
+  <footer class="bg-dark text-light mt-5" style="padding: 2% 0;">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-4">
+              <h5>Contact Us</h5>
+              <p>Email: <a href="mailto:maagarlevi47@gmail.com" class="text-light">info@example.com</a></p>
+              <p>Location: Bhaktapur, Dudhpati -14 </p>
+              <p>Contact Number: +1 234-567-890</p>
+          </div>
+          <div class="col-md-4">
+              <!-- Add additional information if needed -->
+          </div>
+          <div class="col-md-4">
+              <h5>Connect With Us</h5>
+              <!-- Add social media links or other contact options if needed -->
+          </div>
+      </div>
+      <hr class="my-4">
+      <p class="text-center">&copy; 2024 Lawyer Recommendation System | <a href="https://www.sainithapamagar.com.np" target="_blank" class="text-light">www.sainithapamagar.com.np</a></p>
+  </div>
+</footer>
+
+
+        </body>
+</html>
