@@ -23,18 +23,29 @@
  <h5><i><strong>Lawyer Management System</strong></i>
  </h5>       </a></li>
             <li class="nav-item">
-              <a class="nav-link {% if active == 'home' %}active{% endif %}" href="/home">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="/about">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/contact">Contact Us</a>
-            </li>
-            <li class="nav-item" style="margin-right:10%;">
-                <a class="nav-link" href="/account/login">Login/Sign Up</a>
-              </li>
-          </ul>
+                  <a class="nav-link {% if active == 'home' %}active{% endif %}" href="/home">Home</a>
+                </li>
+                {%if user.is_authenticated%}
+                <li class="nav-item">
+                  <a class="nav-link" href="/lawyer_list">Lawyers for you</a>
+                </li>
+                {%endif%}
+                <li class="nav-item">
+                  <a class="nav-link  {% if active == 'help' %}active{% endif %}" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link  {% if active == 'contact' %}active{% endif %}" href="/contact">Contact Us</a>
+                </li>
+                {%if user.is_authenticated%}
+                <li class="nav-item">
+                  <a class="nav-link" href="/account/logout">Logout</a>
+                </li>
+                {%else%}            
+                <li class="nav-item">
+                  <a class="nav-link  {% if active == 'log' %}active{% endif %}" href="/account/login">Login/Sign Up</a>
+                </li>
+              </ul>
+              {%endif%}
         </div>
     <!-- <div class="card-body">
           <h1 class="card-title">This is a help page</h1>

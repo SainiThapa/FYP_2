@@ -16,49 +16,46 @@
     <title>Homepage</title>
 </head>
 <body>
-    <!-- HEADER NAVIGATION BAR  -->
-  <div class="card text-center ">
+  
+  <!-- HEADER NAVIGATION BAR  -->
+  <div class="card text-left ">
         <div class="card-header ">
-          <ul class="nav nav-tabs card-header-tabs justify-content-end"> 
+          <ul class="nav nav-tabs card-header-tabs justify-content-center"> 
             <li class="nav-item" style="margin-right:40%; font-family:'palatino linotype';">
-            <a class="nav-link" href="/" style="display:block; color:#000;">
-              <!-- <img src="{%static 'img/logo.png'%}" width="60%" alt=""> -->
- <h5><i><strong>Lawyer Management System</strong></i>
- </h5>       </a></li>
-            <li class="nav-item">
-              <a class="nav-link {% if active == 'home' %}active{% endif %}" href="/home">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link  {% if active == 'help' %}active{% endif %}" href="/about">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link  {% if active == 'contact' %}active{% endif %}" href="/contact">Contact Us</a>
-            </li>
-            {%if user.is_authenticated%}
-            <li class="nav-item" style="margin-right:10%;">
-              <a class="nav-link" href="/account/logout">Logout</a>
-            </div>
-            
-              </li>
-              {%else%}            
-              <li class="nav-item" style="margin-right:10%;">
-              <a class="nav-link  {% if active == 'log' %}active{% endif %}" href="/account/login">Login/Sign Up</a>
-            </div>
-              </li>
+              <a class="nav-link" href="/" style="display:block; color:#000;">
+                <!-- <img src="{%static 'img/logo.png'%}" width="60%" alt=""> -->
+                <h5><i><strong>Lawyer Management System</strong></i>
+                </h5>       </a></li>
+                <li class="nav-item">
+                  <a class="nav-link {% if active == 'home' %}active{% endif %}" href="/home">Home</a>
+                </li>
+                {%if user.is_authenticated%}
+                <li class="nav-item">
+                  <a class="nav-link" href="/lawyer_list">Lawyers for you</a>
+                </li>
+                {%endif%}
+                <li class="nav-item">
+                  <a class="nav-link  {% if active == 'help' %}active{% endif %}" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link  {% if active == 'contact' %}active{% endif %}" href="/contact">Contact Us</a>
+                </li>
+                {%if user.is_authenticated%}
+                <li class="nav-item">
+                  <a class="nav-link" href="/account/logout">Logout</a>
+                </li>
+                {%else%}            
+                <li class="nav-item">
+                  <a class="nav-link  {% if active == 'log' %}active{% endif %}" href="/account/login">Login/Sign Up</a>
+                </li>
+              </ul>
+          </div>
+  </div>
               {%endif%}
 
-          </ul>
-        <!-- <div class="card-body">
-          <h5 class="card-title">This is the homepage</h5>
-          <p class="card-text">Below exists the image we are trying to load</p>
-          <img src="{%static 'img/pic1.jpg'%}" class="img-fluid" alt="ALT.img">
-          <br><a href="#" class="btn btn-primary">Go somewhere</a>
-        </div> -->
-      </div>
-<!-- BODY HERE -->
-{%block content%}
-<!-- Carousel -->
-
+          <!-- BODY HERE -->
+          <!-- Carousel -->
+          
 <div id="carouselExample" class="carousel slide">
   <div class="carousel-inner">
     <div class="carousel-item active">
@@ -107,8 +104,11 @@
                   <h2>Find the best lawyer for you<br/></h2>
                   <p>We provide the system to recommend you the best and most relevant lawyers and attorneys to you related to your specific information and reasoning.<br/></p>
                   <p class="o_default_snippet_text">Log in to know and find more about the services.<br/></p>
-      <p><br/></p>
-                  <p><a href="/log" class="oe_edited_link btn btn-secondary" data-bs-original-title="" title="" aria-describedby="popover928516">Login</a><br/></p>
+      <p><br/></p>{%if user.is_authenticated%}
+                  <p><a href="/lawyer_list" class="oe_edited_link btn btn-secondary" data-bs-original-title="" title="" aria-describedby="popover928516">Click Here</a><br/></p>
+                  {%else%}
+                  <p><a href="/signup" class="oe_edited_link btn btn-secondary" data-bs-original-title="" title="" aria-describedby="popover928516">Signup</a><br/></p>
+                  {%endif%}
               </div>
           </div>
       </div>
@@ -144,11 +144,10 @@
 </div>
 <p>&copy; www.lawyerrecommendationsystem.com</p>
 </footer>
-
 <!-- FOOTER -->
 
-{%endblock%}
-  <!-- Bootstrap CSS -->
+
+<!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-GLhlTQ8iEETHSmAK6GO9TU7GUgMwsM5O8F7XT5nfgicOMLZCUXdGj3MEKiSbO6jC" crossorigin="anonymous">
 
   <!-- Bootstrap JS and Popper.js -->
@@ -156,5 +155,6 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyL/K5V8e5W5gBOn//6uUvoys87hub4N2J" crossorigin="anonymous"></script>   -->
   <script>window.jQuery || document.write('<script src="{% static "js/jquery-3.5.1.slim.min.js" %}"><\/script>')</script>
+
 </body>
 </html>

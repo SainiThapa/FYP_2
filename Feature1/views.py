@@ -1,4 +1,6 @@
 from django.shortcuts import redirect, render
+from account.models import Lawyer
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -20,15 +22,20 @@ def choose_user_type(request):
             return redirect('/account/register/client')
     return render(request, 'choose.html')
 
-
 def index(request):
-    return render(request,"index.html",{'active': 'home'})
+    return render(request, "index.html", {'active': 'home'})
 
+@login_required
 def contact(request):
-    return render(request,"contact.html",{'active': 'contact'})
+    return render(request, "contact.html", {'active': 'contact'})
 
 def log(request):
     return render(request,"log.html",{'active': 'log'})
 
 def help(request):
     return render(request,"help.html",{'active': 'about'})
+
+def lawyer_list(request):
+    lawyers=Lawyer.objects.all()
+    print(lawyers)
+    return render(request,"Lawyer/Lawyer_list.html",{"lawyers":lawyers})

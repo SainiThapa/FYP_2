@@ -20,9 +20,19 @@ def log_in(request):
         user=auth.authenticate(username=name,password=password)
         if user is not None:
             # User found and password matches, log in the user
-            auth.login(request, user)
-            print("Login successful")
-            return redirect('/')
+            for object in Client.objects.all():
+                if name==object.username:
+                    auth.login(request, user)
+                    print("Client Login successful")
+                    return redirect('/')
+            for lawyer in Lawyer.objects.all():
+                if lawyer.username==name:
+                    if lawyer.license_verify_status:
+                        auth.login(request,user)
+                        print("Lawyer Login Successful")
+                        return redirect('/')
+                    else:
+                        return render(request,"lawyer/login.html")
         # print(User.objects.all())
         else:
             messages.error(request,'Invalid Credentials !!')
@@ -85,7 +95,7 @@ def lawyer_registration(request):
         Lawyername=request.POST.get("name")
         location=request.POST.get('location')
         email=request.POST.get('email')
-        profile_picture=request.POST.get('profile_picture')
+        profile_picture=request.FILES.get('profile_picture')
         phone=request.POST.get('phone')
         password1=request.POST.get('password1')
         password2=request.POST.get('password2')
@@ -94,15 +104,16 @@ def lawyer_registration(request):
 
         # License
         license_no=request.POST.get('license_no')
-        license_img=request.POST.get('license_img')
+        license_img=request.FILES.get('license_img')
+        license_verify_status=False
         license_location=request.POST.get('license_location')
 
         # Academic
-        academic_degree=request.POST.get('academic_degree')
+        academic_degree=request.FILES.get('academic_degree')
         completion_year=request.POST.get('completion_year')
         major_subject=request.POST.get('major_subject')
 
-        if Lawyername=='' or phone=='' or email=='' or location=='' or password1=='' or password2=='' or profile_picture=="" or profile_description=="" or specialization_tags=="" or license_no=="" or license_location=="" or academic_degree=="" or completion_year=="" or major_subject=="":
+        if Lawyername=='' or phone=='' or email=='' or location=='' or password1=='' or password2=='' or profile_picture is None or profile_description=="" or specialization_tags=="" or license_img is None or license_no=="" or license_location=="" or academic_degree is None or completion_year=="" or major_subject=="":
             messages.error(request,"Make sure to fill all the boxes !!")
             # return redirect('/account/register/lawyer')
         else:
@@ -111,12 +122,11 @@ def lawyer_registration(request):
                        messages.error(request,"Email already in use !!")
                        return redirect("/account/register/lawyer")
                   else:
-                    lawyer=Lawyer.objects.create(username=Lawyername,email=email,password=password1,
-                    profile_picture=profile_picture,location=location,phone=phone,license_no=license_no,license_img=license_img,license_location=license_location,academic_degree=academic_degree,completion_year=completion_year,major_subject=major_subject)
+                    user=User.objects.create_user(username=Lawyername,email=email,password=password1)
+                    user.save()
+                    lawyer=Lawyer.objects.create(user=user,username=Lawyername,email=email,password=password1,
+                    profile_picture=profile_picture,location=location,phone=phone, specialization_tags= specialization_tags,profile_description=profile_description,license_no=license_no,license_img=license_img,license_verify_status=license_verify_status,license_location=license_location,academic_degree=academic_degree,completion_year=completion_year,major_subject=major_subject)
                     lawyer.save()
-                    if(Lawyer.license_verify_status):
-                        user=User.objects.create_user(username=Lawyername,email=email,password=password1)
-                        user.save()
                     print('LAWYER CREATED !')
                     return redirect('/login')
              else:

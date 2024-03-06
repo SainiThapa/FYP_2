@@ -32,7 +32,7 @@ class Lawyer(models.Model):
     profile_picture = models.ImageField(upload_to='profile_picture', null=True, blank=True)
     location = models.CharField(max_length=255)
     phone=models.BigIntegerField(null=True)
-    specialization_tags = models.JSONField(default=list)
+    specialization_tags = models.TextField()
     profile_description = models.TextField()
     license_no = models.PositiveIntegerField(null=True)
     license_img = models.ImageField(upload_to='license_img', null=True, blank=False)

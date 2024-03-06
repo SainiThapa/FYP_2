@@ -4,14 +4,13 @@ from .models import Client, Lawyer, File, CASE
 
 # Register your models here.
 
-def approve_lawyer(modeladmin, request, queryset):
-    queryset.update(license_verify_status=True)
-
-approve_lawyer.short_description = "Approve selected lawyers"
 
 class LawyerAdmin(admin.ModelAdmin):
     list_display = ['username', 'license_verify_status']
-    actions = [approve_lawyer]
+    actions = ['approve_license']
+    def approve_license(self, request, queryset):
+        queryset.update(license_verify_status=True)
+    approve_license.short_description = "Approve selected lawyers' license"
 
 admin.site.register(Client)
 admin.site.register(Lawyer,LawyerAdmin)
