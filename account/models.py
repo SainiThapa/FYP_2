@@ -44,6 +44,15 @@ class Lawyer(models.Model):
     
     def __str__(self):
             return self.username
+    
+    def save(self, *args, **kwargs):
+        user = User.objects.get(email=self.email)
+
+        if self.license_verify_status:
+            user.is_active = True
+            user.save()
+        super().save(*args, **kwargs)
+
 
 class File(models.Model):
     file_id=models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

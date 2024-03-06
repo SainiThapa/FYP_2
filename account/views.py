@@ -123,6 +123,7 @@ def lawyer_registration(request):
                        return redirect("/account/register/lawyer")
                   else:
                     user=User.objects.create_user(username=Lawyername,email=email,password=password1)
+                    user.is_active = False
                     user.save()
                     lawyer=Lawyer.objects.create(user=user,username=Lawyername,email=email,password=password1,
                     profile_picture=profile_picture,location=location,phone=phone, specialization_tags= specialization_tags,profile_description=profile_description,license_no=license_no,license_img=license_img,license_verify_status=license_verify_status,license_location=license_location,academic_degree=academic_degree,completion_year=completion_year,major_subject=major_subject)
