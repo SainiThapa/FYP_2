@@ -1,0 +1,12 @@
+{%load static%}
+
+
+<h1>My Profile</h1>
+
+<p><h3 style="font-family:Cambria;">Name : {{user.username}}</h3></p>
+<p><img src="{{user.profile_picture.url}}" alt="{%static 'img/blank.jpg'%}" style="height: 300px; width:auto;"></p>
+<p><h3>Phone no: {{user.phone}} </h3></p>
+<p><h3 style="font-family:Cambria;">Location : {{user.location}}</h3></p>
+
+<p><h3 style="font-family:Cambria;">Specialization tags: {{user.specialization_tags}}</h3></p>
+

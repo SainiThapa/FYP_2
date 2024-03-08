@@ -48,9 +48,15 @@
                 <li class="nav-item">
                   <a class="nav-link  {% if active == 'log' %}active{% endif %}" href="/account/login">Login/Sign Up</a>
                 </li>
+                {%endif%}
+                {%if request.user.is_authenticated%}
+                <!-- <h1>{{request.user.email}}</h1> -->
+                <li class="nav-item">
+                  <a class="nav-link  {% if active == 'profile' %}active{% endif %}" href="/my_profile">Hello, {{request.user.username}}</a>
+                </li>
+                {%endif%}
               </ul>
           </div>
-              {%endif%}
 
           <!-- BODY HERE -->
           <!-- Carousel -->

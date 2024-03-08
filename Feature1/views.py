@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from account.models import Lawyer
+from account.models import File, Lawyer,User, Client
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -25,7 +25,6 @@ def choose_user_type(request):
 def index(request):
     return render(request, "index.html", {'active': 'home'})
 
-@login_required
 def contact(request):
     return render(request, "contact.html", {'active': 'contact'})
 
@@ -37,5 +36,47 @@ def help(request):
 
 def lawyer_list(request):
     lawyers=Lawyer.objects.all()
-    print(lawyers)
-    return render(request,"Lawyer/Lawyer_list.html",{"lawyers":lawyers})
+    approvedLawyer=[]
+    for lawyer in lawyers:
+        if(lawyer.license_verify_status):
+            approvedLawyer.append(lawyer)
+    return render(request,"Lawyer/index-1.html",{"lawyers":approvedLawyer})
+
+def lawyer(request,num):
+    data=Lawyer.objects.get(user_id=num)
+    return render(request,"lawyer/Lawyer_profile.html",{"data":data})
+
+def create_file(request):
+    if request.method=='POST':
+        filedesc=request.POST.get("file_description")
+        currentuser=request.user
+        print(currentuser)
+        for user in Client.objects.all():
+            if currentuser.username ==user.username:
+                file=File.objects.create(client=user,file_description=filedesc)
+                file.save()
+                return redirect('/my_profile')
+    return render(request,"client/Create_file.html")
+
+
+def my_profile(request):
+
+    user=request.user
+    Files=File.objects.all()
+    pastfile=[]
+    for client in Client.objects.all():
+        if client.username == user.username:
+            current_user=client
+            for file in Files:
+                if file.client.username==user.username:
+                    print(file)
+                    pastfile.append(file)
+            return render(request,"client/client_profile.html",{'user':current_user,'files':pastfile})
+        # return render(request,"client/client_profile.html",{'user':current_user})
+    
+    for lawyer in Lawyer.objects.all():
+        if lawyer.username == user.username:
+            current_lawyer=lawyer
+            return render(request,"lawyer/lawyer_myprofile.html",{'user':current_lawyer})
+        
+    return render(request,"auth/404.html")

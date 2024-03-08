@@ -13,4 +13,7 @@ urlpatterns=[
     path('contact',views.contact,name="contact"),
     path('about',views.help,name="help"),
 
+    path('Lawyer/<num>/',views.lawyer, name="num"),
+    path('my_profile',views.my_profile,name="my_profile"),
+    path('createfile',views.create_file,name="create_file")
 ]

@@ -1,0 +1,15 @@
+{%load static%}
+
+
+<p>{{user.username}}</p>
+<p><img src="{{user.profile_picture.url}}"></p>
+<p>{{user.phone}}</p>
+<p>{{user.location}}</p>
+
+{%if files%}
+<h2>Past files: {{ files|length }}</h2>
+{%for file in files%}
+<p>{{file.file_description}}</p>
+{%endfor%}
+{%endif%}
+<h3><a href="/createfile">Create File</a></h3>

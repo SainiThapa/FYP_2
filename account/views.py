@@ -14,6 +14,7 @@ def signup(request):
      return render(request,"signup.html")
 
 def log_in(request):
+    auth.logout(request)
     if request.method=='POST':
         name=request.POST.get('name','default value')
         password=request.POST.get('password','default value')
@@ -24,13 +25,13 @@ def log_in(request):
                 if name==object.username:
                     auth.login(request, user)
                     print("Client Login successful")
-                    return redirect('/')
+                    return redirect('/',{'user':user})
             for lawyer in Lawyer.objects.all():
                 if lawyer.username==name:
                     if lawyer.license_verify_status:
                         auth.login(request,user)
                         print("Lawyer Login Successful")
-                        return redirect('/')
+                        return redirect('/',{'user':lawyer})
                     else:
                         return render(request,"lawyer/login.html")
         # print(User.objects.all())
@@ -62,7 +63,7 @@ def client_registration(request):
         if profile_picture:
              pass
         else:
-             profile_picture=settings.STATIC_URL+"img/blank.webp"
+             profile_picture=settings.STATIC_URL+"img/blank.jpg"
 
         if Clientname=='' or phone=='' or email=='' or location=='' or password1=='' or password2=='':
             messages.info(request,"Make sure to fill all the boxes !!")

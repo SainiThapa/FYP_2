@@ -14,7 +14,7 @@ class Client(models.Model):
     # is_active=models.BooleanField(default=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     username=models.CharField(max_length=128)
-    email=models.EmailField(unique=True)
+    email=models.EmailField()
     password=models.CharField(max_length=128,null=True)
     profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
     location = models.CharField(max_length=255)
@@ -58,9 +58,10 @@ class File(models.Model):
     file_id=models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     file_description=models.TextField()
     client=models.ForeignKey(Client, on_delete=models.CASCADE)
+    # filetags=models.TextField()
 
     def __str__(self):
-        return f"{self.client.name} - {self.file_id} - {self.file_description}"
+        return f"{self.client.username} - {self.file_id} - {self.file_description}"
     
 
 class CASE(models.Model):

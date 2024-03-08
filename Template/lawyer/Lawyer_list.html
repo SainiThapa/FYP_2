@@ -10,12 +10,14 @@
 <body>
 
     {%for lawyer in lawyers%}
-    <div class="container">
-        <p>{{lawyer.username}}</p>
-        <p>{{lawyer.location}}</p>
-        <p><img src="{{lawyer.profile_picture.url}}" alt="{%static 'img/blank.webp'%}"></p>
-        <p>{{lawyer.email}}</p>
-    </div>
+   <a href="/Lawyer/{{lawyer.user_id}}">
+       <div class="container" style="height: 300px; width:300px; border:1px solid black;">
+           <p>{{lawyer.username}}</p>
+           <p>{{lawyer.location}}</p>
+           <p><img src="{{lawyer.profile_picture.url}}" alt="{%static 'img/blank.webp'%}"></p>
+           <p>{{lawyer.email}}</p>
+        </div>
+    </a>
     
     {%endfor%}
 </body>

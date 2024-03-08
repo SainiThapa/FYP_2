@@ -1,0 +1,184 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/52c0f81a6f.js" crossorigin="anonymous"></script>
+  <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha384-kJ8d6+gt5l8e8e+q5EWJzD1FkN5i/NA99cWXZloEqfY8llOgJm81ol6zFehTJo" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <title>Homepage</title>
+</head>
+<body>
+  
+  <!-- HEADER NAVIGATION BAR  -->
+  <div class="card text-left ">
+        <div class="card-header ">
+          <ul class="nav nav-tabs card-header-tabs justify-content-center"> 
+            <li class="nav-item" style="margin-right:20%; font-family:'palatino linotype';">
+              <a class="nav-link" href="/" style="display:block; color:#000;">
+         
+                <h5><i><strong>Lawyer Management System</strong></i>
+                </h5>       </a></li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/home">Home</a>
+                </li>
+                {%if user.is_authenticated%}
+                <li class="nav-item">
+                  <a class="nav-link" href="/lawyer_list">Lawyers for you</a>
+                </li>
+                {%endif%}
+                <li class="nav-item">
+                  <a class="nav-link" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/contact">Contact Us</a>
+                </li>
+                {%if user.is_authenticated%}
+                <li class="nav-item">
+                  <a class="nav-link" href="/account/logout">Logout</a>
+                </li>
+                {%else%}
+                <li class="nav-item">
+                  <a class="nav-link" href="/account/login">Login/Sign Up</a>
+                </li>
+                {%endif%}
+              </ul>
+          </div>
+  </div>
+
+  <!-- BODY HERE -->
+<!-- BODY HERE -->
+{%for lawyer in lawyers%}
+<div class="container" style="margin-top: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+  <div class="row">
+    <!-- Card -->
+    <div class="col-md-4 mb-4">
+      <div class="card" style="width: 85%;">
+            <a href="/Lawyer/{{lawyer.user_id}}">
+            <img src="{{lawyer.profile_picture.url}}" class="card-img-top" alt="{%static 'img/blank.webp'%}">
+          </a>
+        <div class="card-body" style="line-height: 3;">
+          <h5 class="card-text" style="margin-bottom: 0;"><i class="fas fa-user" style="padding-right: 10px; line-height: 2;"></i>{{lawyer.username}}</h5>
+          <p class="card-text" style="margin-bottom: 5px;"><i class="fas fa-map-marker-alt" style="padding-right: 10px; line-height: 2;"></i>{{lawyer.location}}</p>
+          <p class="card-text" style="margin-bottom: 5px;"><i class="fas fa-phone" style="padding-right: 5px; line-height: 2;"></i>+977-{{lawyer.phone}}</p>
+          <p class="card-text" style="margin-bottom: 5px; line-height: 2;">
+            <i class="fas fa-star rating-star" data-rating="1"></i>
+              <i class="fas fa-star rating-star" data-rating="2"></i>
+              <i class="fas fa-star rating-star" data-rating="3"></i>
+              <i class="fas fa-star rating-star" data-rating="4"></i>
+              <i class="fas fa-star rating-star" data-rating="5"></i>
+            <input type="hidden" name="rating" class="rating-value">
+          </p>
+          <p class="card-text" style="margin-bottom: 0;"><i class="fas fa-briefcase" style="padding-right: 10px; line-height: 2;"></i>{{lawyer.specialization_tags}}</p>
+        </div>
+      </div>
+    </div>
+    <!-- End of Card -->
+    
+    <!-- Repeat the above card structure for each lawyer -->
+  </div>
+</div>
+{%endfor%}
+<style>
+  /* Custom Styles */
+  .card {
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-body {
+    padding: 20px;
+  }
+
+  .card-text {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 5px;
+  }
+
+  .rating-star {
+    font-size: 24px;
+    color: #ddd;
+    cursor: pointer;
+    transition: color 0.25s;
+  }
+
+  .rating-star:hover,
+  .rating-star.active {
+    color: gold;
+  }
+
+</style>
+
+
+<script>
+  // JavaScript for interactive star rating
+  const ratingStars = document.querySelectorAll('.rating-star');
+
+  ratingStars.forEach(star => {
+    star.addEventListener('click', () => {
+      const ratingValue = parseInt(star.dataset.rating);
+      document.querySelector('.rating-value').value = ratingValue;
+
+      ratingStars.forEach(s => {
+        if (parseInt(s.dataset.rating) <= ratingValue) {
+          s.classList.add('active');
+        } else {
+          s.classList.remove('active');
+        }
+      });
+    });
+  });
+</script>
+
+
+      
+
+<!-- FOOTER -->
+
+<style>
+  /* Add your custom styles here */
+  footer {
+      background-color: #000;
+      color: #fff;
+      padding: 20px 0;
+      margin-top: 50px;
+      margin-bottom: 0px;
+  }
+
+  .social-icons a {
+      color: #fff;
+      margin-right: 15px;
+  }
+</style>
+<div class="container">
+<!-- Your content goes here -->
+</div>
+
+<footer class="text-center">
+<div class="social-icons">
+  <a href="https://www.facebook.com/hanbin.magar" target="_blank"><i class="fa-brands fa-facebook"></i> Facebook</a>
+  <a href="https://www.twitter.com" target="_blank"><i class="fa-brands fa-twitter"></i>Twitter </a>
+  <a href="https://www.instagram.com/priz_47" target="_blank"><i class="fa-brands fa-square-instagram"></i>Instagram</a>
+  <!-- Add more social media icons as needed -->
+</div>
+<p>&copy; www.lawyerrecommendationsystem.com</p>
+</footer>
+<!-- FOOTER -->
+
+
+<!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-GLhlTQ8iEETHSmAK6GO9TU7GUgMwsM5O8F7XT5nfgicOMLZCUXdGj3MEKiSbO6jC" crossorigin="anonymous">
+
+  <!-- Bootstrap JS and Popper.js -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyL/K5V8e5W5gBOn//6uUvoys87hub4N2J" crossorigin="anonymous"></script>   -->
+  <script>window.jQuery || document.write('<script src="{% static "js/jquery-3.5.1.slim.min.js" %}"><\/script>')</script>
+
+</body>
+</html>
