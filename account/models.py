@@ -34,6 +34,7 @@ class Lawyer(models.Model):
     phone=models.BigIntegerField(null=True)
     specialization_tags = models.TextField()
     profile_description = models.TextField()
+    ratings = models.DecimalField(max_digits=2, decimal_places=1, default=1, validators=[MinValueValidator(1), MaxValueValidator(5)])
     license_no = models.PositiveIntegerField(null=True)
     license_img = models.ImageField(upload_to='license_img/', null=True, blank=False)
     license_location = models.CharField(max_length=255, null=True)
@@ -56,9 +57,10 @@ class Lawyer(models.Model):
 
 class File(models.Model):
     file_id=models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    file_title=models.CharField(max_length=128)
     file_description=models.TextField()
     client=models.ForeignKey(Client, on_delete=models.CASCADE)
-    # filetags=models.TextField()
+    filetags=models.TextField()
 
     def __str__(self):
         return f"{self.client.username} - {self.file_id} - {self.file_description}"
@@ -67,12 +69,29 @@ class File(models.Model):
 class CASE(models.Model):
     VICTORY = 'VICTORY'
     DEFEAT = 'DEFEAT'
-    STATUS_CHOICES = [
+    STATUS_CHOICES = [  
         (VICTORY, 'Victory'),
         (DEFEAT, 'Defeat'),
     ]
     file=models.ForeignKey(File,on_delete=models.CASCADE)
+    case_title=models.CharField(max_length=60,default="New Case")
     lawyer=models.ForeignKey(Lawyer,on_delete=models.CASCADE)
     ratings = models.DecimalField(max_digits=2, decimal_places=1, default=1, validators=[MinValueValidator(1), MaxValueValidator(5)])  # noqa: F821
     case_status=models.CharField(max_length=7, choices=STATUS_CHOICES, default=VICTORY)
     case_approval=models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.case_title} - {self.lawyer} - {self.case_approval}"
+
+class Connection(models.Model):
+    client=models.ForeignKey(Client,on_delete=models.CASCADE)
+    lawyer=models.ForeignKey(Lawyer,on_delete=models.CASCADE)
+    case=models.ForeignKey(CASE,on_delete=models.CASCADE)
+    connect_status=models.BooleanField(default=False)
+    is_removed=models.BooleanField(default=False)
+    def save(self, is_removed=False,*args, **kwargs):
+        newcase = CASE.objects.get(id=self.case.id)
+        if self.connect_status and is_removed is False:
+            newcase.case_approval=True
+            newcase.save()
+        super().save(*args, **kwargs)

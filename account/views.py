@@ -23,15 +23,17 @@ def log_in(request):
             # User found and password matches, log in the user
             for object in Client.objects.all():
                 if name==object.username:
+                    a=True
                     auth.login(request, user)
                     print("Client Login successful")
-                    return redirect('/',{'user':user})
+                    return redirect('/',{'user':user,'a':a})
             for lawyer in Lawyer.objects.all():
                 if lawyer.username==name:
                     if lawyer.license_verify_status:
+                        a=False
                         auth.login(request,user)
                         print("Lawyer Login Successful")
-                        return redirect('/',{'user':lawyer})
+                        return redirect('/',{'user':lawyer,'a':a})
                     else:
                         return render(request,"lawyer/login.html")
         # print(User.objects.all())

@@ -15,5 +15,13 @@ urlpatterns=[
 
     path('Lawyer/<num>/',views.lawyer, name="num"),
     path('my_profile',views.my_profile,name="my_profile"),
-    path('createfile',views.create_file,name="create_file")
+    path('createfile',views.create_file,name="create_file"),
+
+    path('Lawyer/<num>/connect',views.lawyerconnect, name="num"),
+    
+
+    path('Lawyer/connectClient',views.connectClient,name="connectClient"),
+    path('pastcases/',views.PastCases,name="PastCases"),
+    path('acceptedCases/',views.acceptedCases,name="acceptedCases"),
+
 ]

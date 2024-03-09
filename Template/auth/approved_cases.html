@@ -1,0 +1,8 @@
+<h1>APPROVED CASES</h1>
+
+{%for case in cases%}
+<p>{{case.case_title}}</p>
+<p>{{case.file.file_description}}</p>
+<p>{{case.ratings}} star</p>
+<p>{{case.case_status}}</p>
+{%endfor%}

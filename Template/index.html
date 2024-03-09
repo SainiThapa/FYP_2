@@ -20,25 +20,33 @@
   <!-- HEADER NAVIGATION BAR  -->
   <div class="card text-left ">
         <div class="card-header ">
-          <ul class="nav nav-tabs card-header-tabs justify-content-center"> 
-            <li class="nav-item" style="margin-right:40%; font-family:'palatino linotype';">
+          <ul class="nav nav-tabs card-header-tabs justify-content-end"> 
+            <li class="nav-item justify-content-left" style="margin-right:20%; font-family:'palatino linotype';">
               <a class="nav-link" href="/" style="display:block; color:#000;">
                 <!-- <img src="{%static 'img/logo.png'%}" width="60%" alt=""> -->
                 <h5><i><strong>Lawyer Management System</strong></i>
                 </h5>       </a></li>
                 <li class="nav-item">
-                  <a class="nav-link {% if active == 'home' %}active{% endif %}" href="/home">Home</a>
+                  <a class="nav-link active" href="/home">Home</a>
                 </li>
-                {%if user.is_authenticated%}
+                {%if user.is_authenticated and a%}
                 <li class="nav-item">
                   <a class="nav-link" href="/lawyer_list">Lawyers for you</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/acceptedCases">Accepted Cases</a>
+                </li>
+                {%endif%}
+                {%if b%}
+                <li class="nav-item">
+                  <a class="nav-link" href="/Lawyer/connectClient">Client Request</a>
+                </li>
                 {%endif%}
                 <li class="nav-item">
-                  <a class="nav-link  {% if active == 'help' %}active{% endif %}" href="/about">About</a>
+                  <a class="nav-link" href="/about">About</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link  {% if active == 'contact' %}active{% endif %}" href="/contact">Contact Us</a>
+                  <a class="nav-link" href="/contact">Contact Us</a>
                 </li>
                 {%if user.is_authenticated%}
                 <li class="nav-item">
@@ -46,17 +54,19 @@
                 </li>
                 {%else%}            
                 <li class="nav-item">
-                  <a class="nav-link  {% if active == 'log' %}active{% endif %}" href="/account/login">Login/Sign Up</a>
+                  <a class="nav-link" href="/account/login">Login/Sign Up</a>
                 </li>
                 {%endif%}
-                {%if request.user.is_authenticated%}
+                {%if user.is_authenticated%}
                 <!-- <h1>{{request.user.email}}</h1> -->
                 <li class="nav-item">
-                  <a class="nav-link  {% if active == 'profile' %}active{% endif %}" href="/my_profile">Hello, {{request.user.username}}</a>
+                  <a class="nav-link" href="/my_profile">Hello, {{user.username}}</a>
                 </li>
                 {%endif%}
               </ul>
           </div>
+          </div>
+          
 
           <!-- BODY HERE -->
           <!-- Carousel -->

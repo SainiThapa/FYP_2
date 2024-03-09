@@ -16,7 +16,7 @@
   <!-- HEADER NAVIGATION BAR  -->
   <div class="card text-left ">
         <div class="card-header ">
-          <ul class="nav nav-tabs card-header-tabs justify-content-center"> 
+          <ul class="nav nav-tabs card-header-tabs justify-content-end"> 
             <li class="nav-item" style="margin-right:20%; font-family:'palatino linotype';">
               <a class="nav-link" href="/" style="display:block; color:#000;">
          
@@ -25,9 +25,12 @@
                 <li class="nav-item">
                   <a class="nav-link" href="/home">Home</a>
                 </li>
-                {%if user.is_authenticated%}
+                {%if user.is_authenticated and a%}
                 <li class="nav-item">
-                  <a class="nav-link" href="/lawyer_list">Lawyers for you</a>
+                  <a class="nav-link active" href="/lawyer_list">Lawyers for you</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/acceptedCases">Accepted Cases</a>
                 </li>
                 {%endif%}
                 <li class="nav-item">
@@ -39,6 +42,9 @@
                 {%if user.is_authenticated%}
                 <li class="nav-item">
                   <a class="nav-link" href="/account/logout">Logout</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/my_profile">Hello {{user.username}}</a>
                 </li>
                 {%else%}
                 <li class="nav-item">
@@ -65,12 +71,14 @@
           <p class="card-text" style="margin-bottom: 5px;"><i class="fas fa-map-marker-alt" style="padding-right: 10px; line-height: 2;"></i>{{lawyer.location}}</p>
           <p class="card-text" style="margin-bottom: 5px;"><i class="fas fa-phone" style="padding-right: 5px; line-height: 2;"></i>+977-{{lawyer.phone}}</p>
           <p class="card-text" style="margin-bottom: 5px; line-height: 2;">
-            <i class="fas fa-star rating-star" data-rating="1"></i>
+            <form action="post">
+              <i class="fas fa-star rating-star" data-rating="1"></i>
               <i class="fas fa-star rating-star" data-rating="2"></i>
               <i class="fas fa-star rating-star" data-rating="3"></i>
               <i class="fas fa-star rating-star" data-rating="4"></i>
               <i class="fas fa-star rating-star" data-rating="5"></i>
-            <input type="hidden" name="rating" class="rating-value">
+              <input type="hidden" name="rating" class="rating-value">
+            </form>
           </p>
           <p class="card-text" style="margin-bottom: 0;"><i class="fas fa-briefcase" style="padding-right: 10px; line-height: 2;"></i>{{lawyer.specialization_tags}}</p>
         </div>

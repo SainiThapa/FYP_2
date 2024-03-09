@@ -16,7 +16,7 @@
   <!-- HEADER NAVIGATION BAR  -->
   <div class="card text-left ">
         <div class="card-header ">
-          <ul class="nav nav-tabs card-header-tabs justify-content-center"> 
+          <ul class="nav nav-tabs card-header-tabs justify-content-end"> 
             <li class="nav-item" style="margin-right:20%; font-family:'palatino linotype';">
               <a class="nav-link" href="/" style="display:block; color:#000;">
          
@@ -25,9 +25,12 @@
                 <li class="nav-item">
                   <a class="nav-link" href="/home">Home</a>
                 </li>
-                {%if user.is_authenticated%}
+                {%if user.is_authenticated and a%}
                 <li class="nav-item">
                   <a class="nav-link" href="/lawyer_list">Lawyers for you</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="/acceptedCases">Accepted Cases</a>
                 </li>
                 {%endif%}
                 <li class="nav-item">
@@ -40,6 +43,9 @@
                 <li class="nav-item">
                   <a class="nav-link" href="/account/logout">Logout</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/my_profile">Hello {{user.username}}</a>
+                </li>
                 {%else%}
                 <li class="nav-item">
                   <a class="nav-link" href="/account/login">Login/Sign Up</a>
@@ -47,21 +53,13 @@
                 {%endif%}
               </ul>
           </div>
-          <div class="card-header">
+  </div>
 
-            <h2>Upload File</h2>
-            <form method="post" enctype="multipart/form-data">
-              {% csrf_token %}
-                <label for="file_title">File Title:</label><br>
-                  <input type="text" name="file_title">
-      <br>            <label for="file_description">File Description:</label><br>
-                  <textarea id="file_description" name="file_description" rows="4" cols="50"></textarea>
-<br>                      <label for="filetags">Needed Specialization:</label><br>
-                    <textarea id="filetags" name="filetags" rows="4" cols="50"></textarea>
-                    <br><br>
-                    <button type="submit">Upload</button>
-                  </div>
-                </div>
-            </form>
-          </div>
-        </div>
+{%for case in cases%}
+<h1>{{case.case_title}}</h1>
+<h2>Approved by {{case.lawyer}}</h2>
+<h3>Rate the case: </h3>
+{%endfor%}
+
+</body>
+</html>

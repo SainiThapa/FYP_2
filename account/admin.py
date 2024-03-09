@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Client, Lawyer, File, CASE
+from .models import CASE, Client, Lawyer, File, Connection
 
 
 # Register your models here.
@@ -19,4 +19,4 @@ admin.site.register(Lawyer,LawyerAdmin)
 # admin.site.register(License)
 admin.site.register(File)
 admin.site.register(CASE)
-# admin.site.register(Academic)
+admin.site.register(Connection)

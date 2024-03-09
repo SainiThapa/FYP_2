@@ -1,5 +1,79 @@
-{%load static%}
-<p>{{data.username}}</p>
-<p><img src="{{data.profile_picture.url}}" alt="{%static 'img/blank.webp'%}"></p>
-<p>{{data.phone}}</p>
-<p>{{data.specialization_tags}}</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lawyer Profile</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+        /* Add your custom styles here */
+        .profile-picture {
+            max-width: 200px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+      <!-- HEADER NAVIGATION BAR  -->
+  <div class="card text-left ">
+    <div class="card-header ">
+      <ul class="nav nav-tabs card-header-tabs justify-content-end"> 
+        <li class="nav-item" style="margin-right:20%; font-family:'palatino linotype';">
+          <a class="nav-link" href="/" style="display:block; color:#000;">
+     
+            <h5><i><strong>Lawyer Management System</strong></i>
+            </h5>       </a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="/home">Home</a>
+            </li>
+            <!-- {%if user.is_authenticated and a%}
+            <li class="nav-item">
+              <a class="nav-link" href="/lawyer_list">Lawyers for you</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/acceptedCases">Accepted Cases</a>
+            </li>
+            {%endif%} -->
+            <li class="nav-item">
+              <a class="nav-link" href="/about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/contact">Contact Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/account/logout">Logout</a>
+            </li>
+            {%if user.is_authenticated%}
+            <li class="nav-item">
+              <a class="nav-link" href="/my_profile">Hello, {{user.username}}</a>
+            </li>
+            {%endif%}
+          </ul>
+      </div>
+</div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="{{data.profile_picture.url}}" alt="Profile Picture" class="profile-picture img-fluid">
+            </div>
+            <div class="col-md-8">
+                <h1>{{data.username}}</h1>
+                <p><strong>Location:</strong> {{data.location}}</p>
+                <p><strong>Phone:</strong> +977-{{data.phone}}</p>
+                <p><strong>Field of Expertise:</strong> {{data.specialization_tags}}</p>
+                <h3>Profile Description:</h3>
+                <p>{{data.profile_description}}</p>
+                <a href="connect"><input type="button" value="Connect"></a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,5 +1,55 @@
 {%load static%}
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/your-font-awesome-kit-id.js" crossorigin="anonymous"></script>
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+
+    <title>Help</title>
+</head>
+<body>
+    <div class="card text-left">
+        <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs justify-content-end"> 
+            <li class="nav-item" style="margin-right:20%; font-family:'palatino linotype';">
+            <a class="nav-link" href="/" style="display:block; color:#000;">
+ <h5><i><strong>Lawyer Management System</strong></i>
+ </h5>       </a></li>
+            <li class="nav-item">
+                  <a class="nav-link {% if active == 'home' %}active{% endif %}" href="/home">Home</a>
+                </li>
+                {%if a%}
+                <li class="nav-item">
+                  <a class="nav-link" href="/lawyer_list">Lawyers for you</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/acceptedCases">Accepted Cases</a>
+                </li>
+                {%endif%}
+
+                <li class="nav-item">
+                  <a class="nav-link" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/contact">Contact Us</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/account/logout">Logout</a>
+                </li>
+              <!-- <h1>{{request.user.email}}</h1> -->
+              <li class="nav-item">
+                <a class="nav-link active" href="/my_profile">Hello, {{user.username}}</a>
+              </li>
+            </div>
+        </div>
 
 <p>{{user.username}}</p>
 <p><img src="{{user.profile_picture.url}}"></p>
