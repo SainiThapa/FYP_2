@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from account.models import CASE, Connection, File, Lawyer,User, Client
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
+from .recommend import get_recommendations
 # Create your views here.
 
 def handle_404(request, exception):
@@ -51,6 +51,7 @@ def help(request):
 
 def lawyer_list(request):
     currentuser=request.user
+
     if Lawyer.objects.filter(user_id=currentuser.id).first():
         return render(request,"auth/404.html")
     lawyers=Lawyer.objects.all()
@@ -58,11 +59,13 @@ def lawyer_list(request):
     for lawyer in lawyers:
         if(lawyer.license_verify_status):
             approvedLawyer.append(lawyer)
+            
     return render(request,"Lawyer/index-1.html",{"lawyers":approvedLawyer,'a':True})
 
 def lawyer(request,num):
     data=Lawyer.objects.get(user_id=num)
-    return render(request,"lawyer/Lawyer_profile.html",{"data":data})
+    cases=CASE.objects.filter(lawyer_id=num,case_approval=True)
+    return render(request,"lawyer/Lawyer_profile.html",{"data":data,"cases":cases})
 
 def create_file(request):
     if request.method=='POST':
@@ -75,9 +78,26 @@ def create_file(request):
         user=Client.objects.get(user_id=currentuser.id)
         file=File.objects.create(client=user,file_title=filetitle,file_description=filedesc,filetags=filetags)
         file.save()
+        lawyer_dict = {}
+        
+        for lawyer in Lawyer.objects.all():
+            lawyer_dict[lawyer.user_id] = lawyer.specialization_tags
+
+
+        lawyer_ids = []
+        for search in filetags.split():
+            recommendations = get_recommendations(search, lawyer_dict)
+            print(recommendations)
+            for doc, similarity in recommendations:
+                if similarity > 0.45:
+                    lawyer_ids.append(doc)
+                # break
+        filtered_lawyers = Lawyer.objects.filter(user_id__in=lawyer_ids)
+        print(filtered_lawyers)
+        sortedlawyers=sorted(filtered_lawyers,key=lambda x: x.ratings,reverse=True)
         # for user in Client.objects.all():
         #     if currentuser.username ==user.username:
-        return redirect('/lawyer_list')
+        return render(request,"client/recommended_lawyers.html",{'lawyers':sortedlawyers})
     return render(request,"client/Create_file.html")
 
 
@@ -92,14 +112,86 @@ def my_profile(request):
                 if file.client.username==user.username:
                     print(file)
                     pastfile.append(file)
+            if request.method=="POST":
+                action=request.POST.get("action")
+                act=action.split(" ")
+                print(act)
+                if act[0]=="Delete":
+                    deletethefile=File.objects.filter(file_id=act[1]).first()
+                    deletethefile.delete()
+                return redirect('/my_profile',{'user':current_user,'files':pastfile,'a':True})
             return render(request,"client/client_profile.html",{'user':current_user,'files':pastfile,'a':True})
         # return render(request,"client/client_profile.html",{'user':current_user})
     
-    for lawyer in Lawyer.objects.all():
-        if lawyer.username == user.username:
-            current_lawyer=lawyer
-            return render(request,"lawyer/lawyer_myprofile.html",{'user':current_lawyer})
+    
+    lawyer = Lawyer.objects.filter(user_id=user.id).first()
+    if lawyer:
+        cases=CASE.objects.filter(lawyer_id=lawyer.user_id,case_approval=True)
+        totalcase=(cases.count())
+        totalratings=0
+        try:
+            for i in cases:
+                totalratings=totalratings+i.ratings
+            rate=format(totalratings/totalcase,".2f")
+            lawyer.ratings=rate
+            lawyer.save()
+        except:
+            lawyer.ratings=totalratings
+            lawyer.save()            
+
+        if(request.method=="POST"):
+            result=request.POST.get("result")
+            res=result.split(" ")
+            file_id=res[1]
+            case=CASE.objects.filter(file_id=file_id,case_approval=True).first()
+            if(res[0]=="V"):
+                case.case_status="VICTORY"
+            elif(res[0]=="D"):
+                case.case_status="DEFEAT"
+            print(case.case_status)
+            case.status_saved=True
+            case.save()
+            return redirect("/my_profile")
+        runningcases=CASE.objects.filter(lawyer_id=lawyer.user_id, case_approval=True,is_running=True)
+        pastcases=CASE.objects.filter(lawyer_id=lawyer.user_id, case_approval=True,is_running=False)
+        return render(request,"lawyer/lawyer_myprofile.html",{'user':lawyer,'cases':cases,'a':False,'runningcases':runningcases,'pastcases':pastcases})
+        
     return render(request,"auth/404.html")
+
+
+def editprofile(request):
+    client=request.user
+    user=Client.objects.filter(user_id=client.id).first()
+    if user:
+        if request.method=="POST":
+            location=request.POST.get("location")
+            phone=request.POST.get("phone")
+            if location:
+                user.location=location
+            if phone:
+                user.phone=phone
+            user.save()
+            return redirect('/my_profile')
+        return render(request,"client/edit_profile.html",{'user':user})
+    else:
+        user=Lawyer.objects.filter(user_id=client.id).first()
+        if request.method=="POST":
+            location=request.POST.get("location")
+            phone=request.POST.get("phone")
+            specialization_tags=request.POST.get("specialization_tags")
+            profile_description=request.POST.get("profile_description")
+
+            if location:
+                user.location=location
+            if phone:
+                user.phone=phone
+            if specialization_tags:
+                user.specialization_tags=specialization_tags
+            if profile_description:
+                user.profile_description=profile_description
+            user.save()
+            return redirect('/my_profile')
+        return render(request,"lawyer/edit_profile.html",{'user':user})
 
 def lawyerconnect(request,num=None):
     currentuser=request.user
@@ -115,14 +207,15 @@ def lawyerconnect(request,num=None):
         print(CASE.objects.all())
         connection=Connection.objects.create(lawyer=lawyer,client=client,case=case)
         connection.save()
-        return render(request,"auth/404.html")
+        messages.info(request,"Case Request send Successfully")
+        return redirect("/my_profile")
     return render(request,"auth/lawyerconnect.html",{'lawyer':lawyer,'files':files})
 
 
 def connectClient(request):
-    user=request.user
-    if(Client.objects.filter(user_id=user.id)):
-        a=True
+    # user=request.user
+    # if(Client.objects.filter(user_id=user.id)):
+    #     a=True
     currentuser=request.user
     # connections=Connection.objects.all()
     connection=Connection.objects.filter(lawyer=currentuser.id,is_removed=False)
@@ -140,7 +233,7 @@ def connectClient(request):
             connect.is_removed=True
             connect.save()
             # connect.delete()
-            return redirect("/Lawyer/connectClient",{'a':a})
+            return redirect("/Lawyer/connectClient")
         else:
             messages.error(request,"Case file Discarded !!")
             connect=Connection.objects.filter(case=btnaction[1]).first()
@@ -148,9 +241,9 @@ def connectClient(request):
             connect.is_removed=True
             connect.save(is_removed=True)
             # connect.delete()
-            return redirect("/Lawyer/connectClient",{'a':a})
+            return redirect("/Lawyer/connectClient")
         
-    return render(request,"lawyer/connectClient.html",{'connection':connection,'a':True})
+    return render(request,"lawyer/connectClient.html",{'connection':connection})
 
 
 def PastCases(request):
@@ -165,11 +258,36 @@ def PastCases(request):
 
 def acceptedCases(request):
 
-    connections=Connection.objects.filter(client_id=request.user.id)
+    connections=Connection.objects.filter(client_id=request.user.id,connect_status=True)
     cases=[connection.case for connection in connections]
+    flag=False
+    if request.method=="POST":
+        rate=request.POST.get("rating")
+        rating_id=rate.split(" ")
+        rating=rating_id[0]
+        file_id=rating_id[1]
 
-    user=request.user
-    a=False
-    if(Client.objects.filter(user_id=user.id)):
-        a=True
-    return render(request, "client/acceptedCases.html",{'cases':cases,'a':True})
+
+        case=CASE.objects.filter(file_id=file_id,case_approval=True).first()
+        case.ratings=rating
+        case.save()
+        print(case)
+        return redirect("/acceptedCases",{'flag':True})
+    return render(request, "client/acceptedCases.html",{'cases':cases,'a':True,'flag':flag})
+
+def casestatus(request):
+
+    if request.method=="POST":
+        case_status=request.POST.get("case_status")
+        running=request.POST.get("is_running")
+        fileid=request.POST.get("fileid")
+
+        currentcase=CASE.objects.filter(file_id=fileid).first()
+        currentcase.case_status=case_status
+
+        currentcase.is_running=running        
+        currentcase.save()
+        print(currentcase)
+        return redirect('/my_profile')
+    cases=CASE.objects.filter(lawyer_id=request.user.id,case_approval=True)
+    return render(request,'lawyer/casestatus.html',{'cases':cases})

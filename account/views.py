@@ -62,12 +62,9 @@ def client_registration(request):
         phone=request.POST.get('phone')
         password1=request.POST.get('password1')
         password2=request.POST.get('password2')
-        if profile_picture:
-             pass
-        else:
-             profile_picture=settings.STATIC_URL+"img/blank.jpg"
+        
 
-        if Clientname=='' or phone=='' or email=='' or location=='' or password1=='' or password2=='':
+        if Clientname=='' or phone=='' or email=='' or location=='' or password1=='' or password2=='' or profile_picture=="":
             messages.info(request,"Make sure to fill all the boxes !!")
             return redirect('client_registration')
         else:

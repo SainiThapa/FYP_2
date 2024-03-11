@@ -43,9 +43,11 @@ class Lawyer(models.Model):
     completion_year = models.DateField(null=True)
     major_subject = models.CharField(max_length=255, null=True)
     
+
     def __str__(self):
             return self.username
     
+
     def save(self, *args, **kwargs):
         user = User.objects.get(email=self.email)
 
@@ -53,6 +55,7 @@ class Lawyer(models.Model):
             user.is_active = True
             user.save()
         super().save(*args, **kwargs)
+
 
 
 class File(models.Model):
@@ -70,8 +73,8 @@ class CASE(models.Model):
     VICTORY = 'VICTORY'
     DEFEAT = 'DEFEAT'
     STATUS_CHOICES = [  
-        (VICTORY, 'Victory'),
-        (DEFEAT, 'Defeat'),
+        (VICTORY, 'VICTORY'),
+        (DEFEAT, 'DEFEAT'),
     ]
     file=models.ForeignKey(File,on_delete=models.CASCADE)
     case_title=models.CharField(max_length=60,default="New Case")
@@ -79,9 +82,19 @@ class CASE(models.Model):
     ratings = models.DecimalField(max_digits=2, decimal_places=1, default=1, validators=[MinValueValidator(1), MaxValueValidator(5)])  # noqa: F821
     case_status=models.CharField(max_length=7, choices=STATUS_CHOICES, default=VICTORY)
     case_approval=models.BooleanField(default=False)
+    status_saved=models.BooleanField(default=False)
+
+    is_running=models.BooleanField(default=True)
 
     def __str__(self):
-        return f"{self.case_title} - {self.lawyer} - {self.case_approval}"
+         return f"{self.case_title} - {self.lawyer} - {self.case_approval} - {self.ratings}"
+    
+    # def save(self,*args,**kwargs):
+    #     runningcase=CASE.objects.filter(file_id=self.file_id)
+    #     if self.case_approval:
+    #         runningcase.is_running=True
+    #         runningcase.save()
+        # super().save(*args, **kwargs)
 
 class Connection(models.Model):
     client=models.ForeignKey(Client,on_delete=models.CASCADE)

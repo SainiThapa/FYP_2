@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit Profile</title>
+<style>
+    /* Basic styling */
+    body {
+        font-family: Arial, sans-serif;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    input[type="text"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+    }
+    input[type="text"][readonly] {
+        background-color: #f2f2f2; /* Grey background for read-only inputs */
+    }
+    input[type="submit"] {
+        background-color: #4CAF50; /* Green */
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+</style>
+</head>
+<body>
+
+<h2>Edit Profile</h2>
+
+<p style=" color:red;"><b>*</b> represents field that cannot be edited <br>If you want to make no changes, just save it as it is</p>
+<form method="POST">
+    {%csrf_token%}
+    <label for="username">*Lawyer Name:</label>
+    <input type="text" id="lawyer_name" name="lawyer_name" value="{{user.username}}" readonly>
+    
+    <label for="email">*Email:</label>
+    <input type="text" id="email" name="email" value="{{ user.email }}" readonly>
+    
+    <label for="location">Location:</label>
+    <input type="text" id="location" name="location" placeholder="{{ user.location }}">
+    
+    <label for="phone_number">Phone Number:</label>
+    <input type="text" id="phone_number" name="phone_number" placeholder="{{ user.phone }}">
+
+    
+    <label for="specialization_tags">Specialization Tags:</label>
+    <textarea name="specialization_tags" placeholder="{{user.specialization_tags}}" cols="40" rows="6"></textarea>
+    
+    <label for="profile_description">Profile Description:</label>
+    <textarea name="profile_description" placeholder="{{user.profile_description}}" cols="40" rows="6"></textarea>
+<br><br>
+    <input type="submit" value="Save Changes">
+</form>
+
+
+</body>
+</html>

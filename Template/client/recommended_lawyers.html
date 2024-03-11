@@ -1,0 +1,207 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{%static 'css/recommend.css'%}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/52c0f81a6f.js" crossorigin="anonymous"></script>
+  <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha384-kJ8d6+gt5l8e8e+q5EWJzD1FkN5i/NA99cWXZloEqfY8llOgJm81ol6zFehTJo" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <title>Homepage</title>
+</head>
+<body>
+  
+  <!-- HEADER NAVIGATION BAR  -->
+  <div class="card text-left ">
+        <div class="card-header ">
+          <ul class="nav nav-tabs card-header-tabs justify-content-end"> 
+            <li class="nav-item" style="margin-right:20%; font-family:'palatino linotype';">
+              <a class="nav-link" href="/" style="display:block; color:#000;">
+         
+                <h5><i><strong>Lawyer Management System</strong></i>
+                </h5>       </a></li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/home">Home</a>
+                </li>
+                
+                <li class="nav-item">
+                  <a class="nav-link active disabled">Lawyers for you</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/lawyer_list">List of Lawyers</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/acceptedCases">Accepted Cases</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/contact">Contact Us</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/account/logout">Logout</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/my_profile">Hello {{user.username}}</a>
+                </li>
+              
+              </ul>
+          </div>
+  </div>
+
+<div id="Lawyers">
+  <div class="l-container">
+    <!-- Card -->
+    {%for lawyer in lawyers%}
+    <div class="lawyer-card">
+      <div>
+
+        <a href="/Lawyer/{{lawyer.user_id}}">
+          <img src="{{lawyer.profile_picture.url}}" class="card-img-top" alt="{%static 'img/blank.webp'%}" style="background-position: center;">
+        </a>
+        <div class="card-body" style="width:400px; line-height: 3; display:block;">
+          <h5 class="card-text" style="margin-bottom: 0;"><i class="fas fa-user" style="padding-right: 10px; line-height: 2;"></i>{{lawyer.username}}</h5>
+          <p class="card-text" style="margin-bottom: 5px;"><i class="fas fa-map-marker-alt" style="padding-right: 10px; line-height: 2;"></i>{{lawyer.location}}</p>
+          <p class="card-text" style="margin-bottom: 5px;"><i class="fas fa-phone" style="padding-right: 5px; line-height: 2;"></i>+977-{{lawyer.phone}}</p>
+          <p class="card-text" style="margin-bottom: 5px; line-height: 2;"><i class="fas fa-star" style="color:gold;" data-rating="1"></i>  {{lawyer.ratings}}</p>
+          <p class="card-text" style="margin-bottom: 0;"><i class="fas fa-briefcase" style="padding-right: 10px; line-height: 2;"></i>{{lawyer.specialization_tags}}</p>
+          </div>
+        </div>
+      </div>
+      <!-- End of Card -->
+      
+      <!-- Repeat the above card structure for each lawyer -->
+    {%endfor%}
+</div>
+</div>
+<style>
+  /* Custom Styles */
+  
+  .card-body {
+    padding: 20px;
+  }
+
+  .card-text {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 5px;
+  }
+  
+  #Lawyers{
+    padding:30px;
+  }
+
+  .l-container{
+    margin-left:10px;
+  }
+
+  .lawyer-card{
+
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width:375px;
+    margin-left:5%;
+    overflow: hidden;
+    box-shadow: 1px black;
+    display: inline-block;
+}
+
+</style>
+
+
+<script>
+  $(document).ready(function()
+  {
+       if($('.bbb_viewed_slider').length)
+          {
+              var viewedSlider = $('.bbb_viewed_slider');
+  
+              viewedSlider.owlCarousel(
+              {
+                  loop:true,
+                  margin:30,
+                  autoplay:true,
+                  autoplayTimeout:6000,
+                  nav:false,
+                  dots:false,
+                  responsive:
+                  {
+                      0:{items:1},
+                      575:{items:2},
+                      768:{items:3},
+                      991:{items:4},
+                      1199:{items:6}
+                  }
+              });
+              if($('.bbb_viewed_prev').length)
+              {
+                  var prev = $('.bbb_viewed_prev');
+                  prev.on('click', function()
+                  {
+                      viewedSlider.trigger('prev.owl.carousel');
+                  });
+              }
+              if($('.bbb_viewed_next').length)
+              {
+                  var next = $('.bbb_viewed_next');
+                  next.on('click', function()
+                  {
+                      viewedSlider.trigger('next.owl.carousel');
+                  });
+              }
+          }
+      });
+</script>
+
+
+      
+
+<!-- FOOTER -->
+
+<style>
+  /* Add your custom styles here */
+  footer {
+      background-color: #000;
+      color: #fff;
+      padding: 20px 0;
+      margin-top: 50px;
+      margin-bottom: 0px;
+  }
+
+  .social-icons a {
+      color: #fff;
+      margin-right: 15px;
+  }
+</style>
+<div class="container">
+<!-- Your content goes here -->
+</div>
+
+<footer class="text-center">
+<div class="social-icons">
+  <a href="https://www.facebook.com/hanbin.magar" target="_blank"><i class="fa-brands fa-facebook"></i> Facebook</a>
+  <a href="https://www.twitter.com" target="_blank"><i class="fa-brands fa-twitter"></i>Twitter </a>
+  <a href="https://www.instagram.com/priz_47" target="_blank"><i class="fa-brands fa-square-instagram"></i>Instagram</a>
+  <!-- Add more social media icons as needed -->
+</div>
+<p>&copy; www.lawyerrecommendationsystem.com</p>
+</footer>
+<!-- FOOTER -->
+
+
+<!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-GLhlTQ8iEETHSmAK6GO9TU7GUgMwsM5O8F7XT5nfgicOMLZCUXdGj3MEKiSbO6jC" crossorigin="anonymous">
+
+  <!-- Bootstrap JS and Popper.js -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyL/K5V8e5W5gBOn//6uUvoys87hub4N2J" crossorigin="anonymous"></script>   -->
+  <script>window.jQuery || document.write('<script src="{% static "js/jquery-3.5.1.slim.min.js" %}"><\/script>')</script>
+
+</body>
+</html>

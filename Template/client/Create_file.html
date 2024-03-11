@@ -16,7 +16,7 @@
   <!-- HEADER NAVIGATION BAR  -->
   <div class="card text-left ">
         <div class="card-header ">
-          <ul class="nav nav-tabs card-header-tabs justify-content-center"> 
+          <ul class="nav nav-tabs card-header-tabs justify-content-end"> 
             <li class="nav-item" style="margin-right:20%; font-family:'palatino linotype';">
               <a class="nav-link" href="/" style="display:block; color:#000;">
          
@@ -27,7 +27,10 @@
                 </li>
                 {%if user.is_authenticated%}
                 <li class="nav-item">
-                  <a class="nav-link" href="/lawyer_list">Lawyers for you</a>
+                  <a class="nav-link" href="/lawyer_list">List of Lawyers</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/acceptedCases">Accepted Cases</a>
                 </li>
                 {%endif%}
                 <li class="nav-item">
@@ -36,15 +39,12 @@
                 <li class="nav-item">
                   <a class="nav-link" href="/contact">Contact Us</a>
                 </li>
-                {%if user.is_authenticated%}
                 <li class="nav-item">
                   <a class="nav-link" href="/account/logout">Logout</a>
                 </li>
-                {%else%}
                 <li class="nav-item">
-                  <a class="nav-link" href="/account/login">Login/Sign Up</a>
+                  <a class="nav-link" href="/my_profile">Hello, {{user.username}}</a>
                 </li>
-                {%endif%}
               </ul>
           </div>
           <div class="card-header">
@@ -57,7 +57,20 @@
       <br>            <label for="file_description">File Description:</label><br>
                   <textarea id="file_description" name="file_description" rows="4" cols="50"></textarea>
 <br>                      <label for="filetags">Needed Specialization:</label><br>
-                    <textarea id="filetags" name="filetags" rows="4" cols="50"></textarea>
+                          <select name="filetags" id="filetags">
+                            <option value="" selected disabled>Choose a Specialized area</option>
+                            <option value="Employment and Labour ">Employment and Labour Lawyer</option>
+                            <option value="Business and corporate">Business lawyer(corporate Lawyer)</option>
+                            <option value="Family">Family lawyer</option>
+                            <option value="Intellectual property">Intellectual property Lawyer</option>
+                            <option value="Entertainment">Entertainment Lawyer</option>
+                            <option value="Real Estate ">Real Estate Lawyer</option>
+                            <option value="Tax">Tax Lawyer</option>
+                            <option value="Criminal Defense">Criminal Defense Lawyer</option>
+                            <option value="Personal injury">Personal injury lawyer</option>
+                            <option value="Bankruptcy">Bankruptcy lawyer</option>
+                            <option value="Constitutional">Constitutional lawyer</option>
+                          </select>
                     <br><br>
                     <button type="submit">Upload</button>
                   </div>

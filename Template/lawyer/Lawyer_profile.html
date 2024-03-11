@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lawyer Profile</title>
+    <title>{{data.username}}</title>
+    <script src="https://kit.fontawesome.com/your-font-awesome-kit-id.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Include Font Awesome CSS -->
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Custom CSS -->
@@ -28,14 +31,12 @@
             <li class="nav-item">
               <a class="nav-link" href="/home">Home</a>
             </li>
-            <!-- {%if user.is_authenticated and a%}
             <li class="nav-item">
-              <a class="nav-link" href="/lawyer_list">Lawyers for you</a>
+              <a class="nav-link active" href="/lawyer_list">List of Lawyers</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/acceptedCases">Accepted Cases</a>
             </li>
-            {%endif%} -->
             <li class="nav-item">
               <a class="nav-link" href="/about">About</a>
             </li>
@@ -54,9 +55,19 @@
       </div>
 </div>
 
+
+{%for message in messages%}
+<div class="container mt-5">
+  <!-- Success message -->
+  <div class="alert alert-success" role="alert">
+<p>{{message}}</p>
+</div>
+</div>
+{%endfor%}
+
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 mb-4">
                 <img src="{{data.profile_picture.url}}" alt="Profile Picture" class="profile-picture img-fluid">
             </div>
             <div class="col-md-8">
@@ -66,12 +77,32 @@
                 <p><strong>Field of Expertise:</strong> {{data.specialization_tags}}</p>
                 <h3>Profile Description:</h3>
                 <p>{{data.profile_description}}</p>
+                <p>Rating: {{data.ratings}}<i class="fas fa-star rating-star" data-rating="1"></i></p>
                 <a href="connect"><input type="button" value="Connect"></a>
             </div>
         </div>
     </div>
-    
-    <!-- Bootstrap JS (optional) -->
+
+    <br>
+    <div class="section">
+      <div class="card justify-content-center align-items-left" style="padding-left:12%;"><u><h1>Past cases</h1></u></div>
+      <br><div class="row d-flex justify-content-center align-items-center h-100">
+      <br>
+      {%for case in cases%}
+      <div class="container">
+            <div class="card">
+              <p><b>Case Title: {{case.file.file_title}}</b></p>
+                <p><b>Client: {{case.file.client.username}}</b></p>
+                <p>{{case.file.file_description}}</p>
+                <p>Rating: {{case.ratings}}<i class="fas fa-star rating-star" data-rating="1"></i></p>        
+              <p>Case Result:
+                <input type="text" id="result" name="result" disabled value="{{case.case_status}}">
+            </div> <br>
+          </div>
+            {%endfor%}
+      </div>
+    </div>
+      <!-- Bootstrap JS (optional) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

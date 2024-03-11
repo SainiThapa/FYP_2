@@ -9,8 +9,17 @@
   <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha384-kJ8d6+gt5l8e8e+q5EWJzD1FkN5i/NA99cWXZloEqfY8llOgJm81ol6zFehTJo" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <title>Homepage</title>
-</head>
+    <title>Accepted Cases</title>
+
+    <style>
+      /* Basic styling */
+      label {
+          display: block;
+          margin-bottom: 10px;
+      }
+      
+  </style>
+  </head>
 <body>
   
   <!-- HEADER NAVIGATION BAR  -->
@@ -27,7 +36,7 @@
                 </li>
                 {%if user.is_authenticated and a%}
                 <li class="nav-item">
-                  <a class="nav-link" href="/lawyer_list">Lawyers for you</a>
+                  <a class="nav-link" href="/lawyer_list">List of Lawyers</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link active" href="/acceptedCases">Accepted Cases</a>
@@ -55,11 +64,37 @@
           </div>
   </div>
 
-{%for case in cases%}
-<h1>{{case.case_title}}</h1>
-<h2>Approved by {{case.lawyer}}</h2>
-<h3>Rate the case: </h3>
+  {%for case in cases%}
+  <div class="card">
+    <div class="container" style="margin-top: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+      <form method="POST">
+        {%csrf_token%}
+        <label for="case_title"><b>Case Title:</b> {{case.case_title}}</label>
+        <label for="lawyer_name"><b>Approved By Lawyer Name:</b> {{case.lawyer}}</label>
+        <label for="rating">Rating:
+    <select id="rating" name="rating" >
+      <option value="{{case.ratings}} {{case.file_id}}" selected>{{case.ratings}}</option>
+      <option value="1 {{case.file_id}}">1</option>
+      <option value="2 {{case.file_id}}">2</option>
+      <option value="3 {{case.file_id}}">3</option>
+      <option value="4 {{case.file_id}}">4</option>
+      <option value="5 {{case.file_id}}">5</option>
+    </select>
+  </label>
+  <input type="submit" value="Submit">
+</form>
+<!-- <label for="case_title"><b>Case Title:</b> {{case.case_title}}</label>
+<label for="lawyer_name"><b>Approved By Lawyer Name:</b> {{case.lawyer}}</label>
+<label for="rating">Rating: {{case.ratings}}</label> -->
+<br>
+</div>
+</div>
+
 {%endfor%}
+
+<!-- <h1>{{case.case_title}}</h1>
+<h2>Approved by {{case.lawyer}}</h2>
+<h3>Rate the case: </h3> -->
 
 </body>
 </html>

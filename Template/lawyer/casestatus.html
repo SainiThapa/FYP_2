@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit Case Status</title>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+<style>
+    /* Basic styling */
+    body {
+        align-items: center;
+        font-family: Arial;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    input[type="text"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+    }
+    input[type="text"][readonly] {
+        background-color: #f2f2f2; /* Grey background for read-only inputs */
+    }
+    .container{
+        width: 50%;
+    }
+    input[type="submit"] {
+        background-color: #4CAF50; /* Green */
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+    h1{
+        text-align: center;
+    }
+    
+</style>
+</head>
+<body>
+
+    <div class="container justify-content-center">
+<br>
+        <h1>Case Status</h1>
+        
+        <p style="text-align: center; color:rgb(214, 111, 111);">* represents field that cannot be edited<br>If you want to make no changes, just save it as it is</p>
+{%for case in cases%}
+<div class="card" style="margin:20px; padding:8px;">
+
+    <h4>CASE {{forloop.counter}}</h4>
+    <form method="POST">
+        {%csrf_token%}
+        <label for="case_title">*Case Title:</label>
+        <input type="text" id="case_title" name="case_title" value="{{case.case_title}}" readonly>
+        
+        <label for="clientname">*Client name:</label>
+        <input type="text" id="clientname" name="clientname" value="{{ case.file.client.username }}" readonly>
+        
+        <label for="case_status">Case Result:</label>
+        <select name="case_status">
+            <option value="{{case.case_status}}" disabled selected>{{case.case_status}}</option>
+            <option value="VICTORY">VICTORY</option>
+            <option value="DEFEAT">DEFEAT</option>
+        </select>
+        <br><br>
+        <label for="is_running">Case Status:</label>
+        <select name="is_running">
+            {%if case.is_running%}<option value="True" disabled selected>ONGOING</option>
+            {%else%}<option value="False" disabled selected>COMPLETED</option>{%endif%}
+            <option value="True">Ongoing</option>
+            <option value="False">Completed</option>
+        </select>
+        <button type="submit" name="fileid" value="{{case.file_id}}">Save</button>
+    </form>
+    <br>
+</div>
+    {%endfor%}
+</div>
+</body>
+</html>

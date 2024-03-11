@@ -41,17 +41,16 @@
           </ul>
       </div>
 </div>
-<br><br><br>
 
-<br><br><br>
-
-<div class="card text-left w-75" style="margin-left:5%;">
+<br>
+<div class="card text-left w-75" style="margin-left:15%;">
     <div class="col-md-4 mb-4">
         <div class="card" style="width: 85%;">
           <img src="{{lawyer.profile_picture.url}}" class="card-img-center" alt="{%static 'img/blank.jpg'%}">
         </div>
-            <h5 class="card-text"><b>Lawyer chosen:</b><i> {{lawyer.username}}</i></h5>
-        <h5 class="card-title">Select a File</h5>
+            
+        <br><h5 class="card-text"><b>Lawyer chosen:</b><i> {{lawyer.username}}</i></h5>
+            <h5 class="card-title">Select a File</h5>
         <form method="post">
             {% csrf_token %}
             <label for="file_id">Select File:</label>

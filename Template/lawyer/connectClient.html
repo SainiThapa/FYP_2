@@ -22,27 +22,19 @@
         <li class="nav-item">
           <a class="nav-link {% if active == 'home' %}active{% endif %}" href="/home">Home</a>
         </li>
-        {%if a%}
                 <li class="nav-item">
                   <a class="nav-link active" href="/Lawyer/connectClient">Client Request</a>
                 </li>
-        {%endif%}
         <li class="nav-item">
           <a class="nav-link  {% if active == 'help' %}active{% endif %}" href="/about">About</a>
         </li>
         <li class="nav-item">
           <a class="nav-link  {% if active == 'contact' %}active{% endif %}" href="/contact">Contact Us</a>
         </li>
-        {%if user.is_authenticated%}
         <li class="nav-item">
           <a class="nav-link" href="/account/logout">Logout</a>
           
         </li>
-        {%else%}            
-        <li class="nav-item">
-          <a class="nav-link  {% if active == 'log' %}active{% endif %}" href="/account/login">Login/Sign Up</a>
-        </li>
-        {%endif%}
         {%if user.is_authenticated%}
         <!-- <h1>{{request.user.email}}</h1> -->
         <li class="nav-item">
@@ -65,7 +57,6 @@
 </div>
 </div>
 {%endfor%}
-          {%if a%}
            {%for connect in connection%}
            <div class="container" style="box-shadow: 1px 2px 1px 2px black;">
                
@@ -85,6 +76,5 @@
             <br>
             <br>
         {%endfor%}
-        {%endif%}
 </body>
 </html>

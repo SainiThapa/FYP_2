@@ -12,6 +12,8 @@ urlpatterns=[
     path('log',views.log,name="log"),
     path('contact',views.contact,name="contact"),
     path('about',views.help,name="help"),
+    path('editprofile',views.editprofile,name="editprofile"),
+
 
     path('Lawyer/<num>/',views.lawyer, name="num"),
     path('my_profile',views.my_profile,name="my_profile"),
@@ -23,5 +25,5 @@ urlpatterns=[
     path('Lawyer/connectClient',views.connectClient,name="connectClient"),
     path('pastcases/',views.PastCases,name="PastCases"),
     path('acceptedCases/',views.acceptedCases,name="acceptedCases"),
-
+    path('casestatus',views.casestatus,name="casestatus"),
 ]

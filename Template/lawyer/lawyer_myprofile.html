@@ -1,6 +1,160 @@
 {%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'css/styling.css'%}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
+    <script src="https://kit.fontawesome.com/your-font-awesome-kit-id.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Include Font Awesome CSS -->
 
+    <title>{{user.username}} Profile</title>
+    <style>
+        p{
+            font-family: Arial;
+        }
+        b{
+            font-size: 18px;
+            font-family:'Times New Roman', Times, serif;
+        }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-03LGQMDQFR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'G-03LGQMDQFR');
+</script>
+</head>
+<body>
+    <div class="card text-left">
+        <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs justify-content-end"> 
+            <li class="nav-item" style="margin-right:20%; font-family:'palatino linotype';">
+            <a class="nav-link" href="/" style="display:block; color:#000;">
+ <h5><i><strong>Lawyer Management System</strong></i>
+ </h5>       </a></li>
+            <li class="nav-item">
+                  <a class="nav-link {% if active == 'home' %}active{% endif %}" href="/home">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/Lawyer/connectClient">Client Request</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/contact">Contact Us</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/account/logout">Logout</a>
+                </li>
+              <!-- <h1>{{request.user.email}}</h1> -->
+              <li class="nav-item">
+                <a class="nav-link active" href="/my_profile">Hello, {{user.username}}</a>
+              </li>
+            </div>
+        </div>
+<section class="h-100 gradient-custom-2">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-9 col-xl-7">
+        <div class="card">
+          <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
+            <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
+              <img src="{{user.profile_picture.url}}"
+                alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
+                style="width: 150px; z-index: 1">
+              {%if not a%}
+                <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
+                style="z-index: 1;">
+                <a href="/editprofile">Edit profile</a>
+              </button>
+              {%endif%}
+            </div>
+            <div class="ms-3" style="margin-top: 130px;">
+              <h5>{{user.username}}</h5>
+              <p>{{user.location}}</p>
+            </div>
+          </div>
+          <div class="p-4 text-black" style="background-color: #f8f9fa;">
+            <div class="d-flex justify-content-end text-center py-1">
+              <div>
+                <p class="mb-1 h5">Phone</p>
+                <p class="small text-muted mb-0">+977-{{user.phone}}</p>
+              </div>
+              <div>
+                <p class="mb-1 h5">Rating</p>
+                <p class="small text-muted mb-0">{{user.ratings}}<i class="fas fa-star rating-star" data-rating="1"></i></p>
+              </div>
+              <div class="px-3">
+                <p class="mb-1 h5">Verified Lawyer</p>
+                <p class="small text-muted mb-0"><img src="{%static 'img/tick.jpg'%}" style="width: 20px;"></p>
+              </div>
+            </div>
+          </div>
+          <div class="card-body p-4 text-black">
+            <div class="mb-5">
+              <p class="lead fw-normal mb-1"><b>About</b></p>
+              <div class="p-4" style="background-color: #f8f9fa;">
+                <p class="font-italic mb-1">Email: {{user.email}}</p>
+                <p class="font-italic mb-1">{{user.profile_description}}</p>
+              </div>
+              <p class="lead fw-normal mb-1"><b>Specialization Area</b></p>
+              <div class="p-4" style="background-color: #f8f9fa;">
+                <p class="font-italic mb-1">{{user.specialization_tags}}</p>
+              </div>
+                <a href="/casestatus"><p class="font-italic mb-1">Manage Case status</p></a>
+            </div>              
+            <br>
+                    <div class="about">
+                      <div class="container">
+                        <div class="row">
+                            <div class="about-col-2">
+                              <h1 class="Subtitle">Work Cases</h1>                              
+                              <div class="tab-titles">
+                                  <p class="tab-links active-link" onclick="opentab('skills')">Ongoing cases</p>
+                                  <p class="tab-links" onclick="opentab('experience')">Past Cases</p>
+                              </div>
+                              <div class="tab-contents active-tab" id="skills">
+                                  {%for runningcase in runningcases%}
+                                  <div class="card justify-content-center">
+
+                                    <ul>
+                                      <li><h4>{{runningcase.file.file_title}}</h4>Client name   : {{runningcase.file.client.username}}
+                                        <br>{{runningcase.file.file_description}} <br>Ratings : {{runningcase.ratings}}<i class="fas fa-star rating-star" data-rating="1"></i></li>
+                                      </ul>
+                                    </div>
+                                    <br>
+                                  {%endfor%}
+                              </div>
+                              <div class="tab-contents" id="experience">
+                                {%for pastcase in pastcases%}
+                                <div class="card justify-content-center">
+                                  <ul>
+                                    <li><h4>{{pastcase.file.file_title}}</h4>Client name:{{pastcase.file.client.username}}
+                                      <br>{{pastcase.file.file_description}} <br>Ratings : {{pastcase.ratings}}<i class="fas fa-star rating-star" data-rating="1"></i></li>
+                                    </ul>
+                                  </div>
+                                  <br>
+                                {%endfor%}
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+             </div>
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 
 <h1>My Profile</h1>
 
 <p><h3 style="font-family:Cambria;">Name : {{user.username}}</h3></p>
@@ -8,5 +162,24 @@
 <p><h3>Phone no: {{user.phone}} </h3></p>
 <p><h3 style="font-family:Cambria;">Location : {{user.location}}</h3></p>
 
-<p><h3 style="font-family:Cambria;">Specialization tags: {{user.specialization_tags}}</h3></p>
+<p><h3 style="font-family:Cambria;">Specialization tags: {{user.specialization_tags}}</h3></p> -->
 
+
+
+<script>
+  var tablinks=document.getElementsByClassName("tab-links");
+  var tabcontents=document.getElementsByClassName("tab-contents");
+  function opentab(tabname){
+      for(tablink of tablinks){
+          tablink.classList.remove("active-link");
+
+      }
+      for(tabcontent of tabcontents){
+          tabcontent.classList.remove("active-tab");
+      }
+      event.currentTarget.classList.add("active-link");
+      document.getElementById(tabname).classList.add("active-tab");
+
+  }
+
+</script>

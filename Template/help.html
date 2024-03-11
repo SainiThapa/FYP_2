@@ -27,7 +27,7 @@
                 </li>
                 {%if user.is_authenticated and a%}
                 <li class="nav-item">
-                  <a class="nav-link" href="/lawyer_list">Lawyers for you</a>
+                  <a class="nav-link" href="/lawyer_list">List of Lawyers</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/acceptedCases">Accepted Cases</a>
@@ -60,6 +60,7 @@
                 <a class="nav-link" href="/my_profile">Hello, {{user.username}}</a>
               </li>
               {%endif%}
+        </div>
         </div>
     <!-- <div class="card-body">
           <h1 class="card-title">This is a help page</h1>
@@ -186,8 +187,6 @@
 </div>
 <a href="/home"><p>&copy; www.lawyerrecommendationsystem.com</p></a>
 </footer>
-
-</div>
 
 
 <!-- End of Body part -->
