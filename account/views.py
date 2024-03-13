@@ -84,7 +84,7 @@ def client_registration(request):
                                       profile_picture=profile_picture,location=location,phone=phone)
                                 client.save()
                                 print('USER CREATED !')
-                                return redirect('/login')
+                                return redirect('account/login')
             else:
                 messages.info(request,"Password doesnot match !!")
                 return redirect('account/register/client')
@@ -129,7 +129,7 @@ def lawyer_registration(request):
                     profile_picture=profile_picture,location=location,phone=phone, specialization_tags= specialization_tags,profile_description=profile_description,license_no=license_no,license_img=license_img,license_verify_status=license_verify_status,license_location=license_location,academic_degree=academic_degree,completion_year=completion_year,major_subject=major_subject)
                     lawyer.save()
                     print('LAWYER CREATED !')
-                    return redirect('/login')
+                    return redirect('/account/login',{'text':'Waiting for the admin to verify your informations'})
              else:
                   messages.error(request,"Password donot match, Try Again !")
                   return redirect('/account/register/lawyer')                                                                  

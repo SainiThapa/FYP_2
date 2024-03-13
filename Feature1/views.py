@@ -88,19 +88,44 @@ def create_file(request):
         user=Client.objects.get(user_id=currentuser.id)
         file=File.objects.create(client=user,file_title=filetitle,file_description=filedesc,filetags=filetags)
         file.save()
-        lawyer_dict = {}
+      
         
-        for lawyer in Lawyer.objects.all():
-            lawyer_dict[lawyer.user_id] = lawyer.specialization_tags
 
-
-        lawyer_ids = []
-        for search in filetags.split():
-            recommendations = get_recommendations(search, lawyer_dict)
-            print(recommendations)
+        fileinfo=filetitle+" " +filedesc
+        case_dict={}
+        cases=CASE.objects.filter(case_approval=True,is_running=False,is_rated=True,case_status="VICTORY")
+        for case in cases:
+                if case.file.filetags==filetags:
+                    case_dict[case.id]=case.case_title+" " +case.file.file_description
+        lawyer_ids=[]
+        # case_id=[]
+        print(case_dict)
+        for search in fileinfo.split():
+            recommendations=get_recommendations(search, case_dict)
             for doc, similarity in recommendations:
-                if similarity > 0.45:
-                    lawyer_ids.append(doc)
+                if similarity>0.5:
+                    # case_id.append(doc)
+                    case = CASE.objects.get(id=doc)
+                    related_lawyers = case.lawyer.all()
+                    lawy_ids = [lawyer.user_id for lawyer in related_lawyers]
+                    lawyer_ids.append(lawy_ids)
+
+
+      
+    #   OLD ALGORITHM
+        # lawyer_dict = {}
+        
+        # for lawyer in Lawyer.objects.all():
+        #     lawyer_dict[lawyer.user_id] = lawyer.specialization_tags
+
+
+        # lawyer_ids = []
+        # for search in filetags.split():
+        #     recommendations = get_recommendations(search, lawyer_dict)
+        #     print(recommendations)
+        #     for doc, similarity in recommendations:
+        #         if similarity > 0.45:
+        #             lawyer_ids.append(doc)
                 # break
         filtered_lawyers = Lawyer.objects.filter(user_id__in=lawyer_ids)
         print(filtered_lawyers)

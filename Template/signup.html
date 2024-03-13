@@ -5,17 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup</title>
+    
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- {%include "auth/nav_bar.html"%} -->
-    <h2>Choose user type: </h2>
-    <form action="{% url 'choose_user_type' %}" method="post">
-        {% csrf_token %}
-        <label><input type="radio" name="user_type" value="client"> Client</label>
-        <br>
-        <label><input type="radio" name="user_type" value="lawyer"> Lawyer</label>
-        <br>
-        <button type="submit">Submit</button>
-    </form>
+<div class="container" style="text-align:justify; padding:15%;" >
+    <div class="card">
+        <div class="card-title" style="margin-left:10%;">    
+            <h2>Choose user type: </h2>
+        </div>
+        <div class="card-body" style="margin-left:10%;">
+
+            <form action="{% url 'choose_user_type' %}" method="post">
+                {% csrf_token %}
+                <h4><label><input type="radio" name="user_type" value="client"> Client</label></h4>
+                <br>
+                <h4><label><input type="radio" name="user_type" value="lawyer"> Lawyer</label></h4>
+                <br>
+                <h5><button type="submit">Submit</button></h5>
+            </form>
+        </div>
+</div>
+</div>
 </body>
 </html>

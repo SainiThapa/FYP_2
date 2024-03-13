@@ -34,7 +34,7 @@ class Lawyer(models.Model):
     phone=models.BigIntegerField(null=True)
     specialization_tags = models.TextField()
     profile_description = models.TextField()
-    ratings = models.DecimalField(max_digits=2, decimal_places=1, default=1, validators=[MinValueValidator(1), MaxValueValidator(5)])
+    ratings = models.DecimalField(max_digits=2, decimal_places=1, default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
     license_no = models.PositiveIntegerField(null=True)
     license_img = models.ImageField(upload_to='license_img/', null=True, blank=False)
     license_location = models.CharField(max_length=255, null=True)

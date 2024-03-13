@@ -1,8 +1,13 @@
 import math
 import re
+# from nltk.corpus import stopwords
 import numpy as np
 
-STOP_WORDS = set(["the", "and", "is", "in", "it", "to", "of", "this", "that", "for","lawyer"])
+with open('C:/Users/Lenovo/Desktop/Lawyer/FYP/Lawyer/Feature1/stopwords.txt', 'r') as file:
+    stopwords = file.readlines()
+STOP_WORDS = [word.strip() for word in stopwords]
+
+# STOP_WORDS = set(["the", "and", "is", "in", "it", "to", "of", "this", "that", "for","lawyer"])
 
 def remove_special_characters(word):
     pattern = r"[^\w\s]"
