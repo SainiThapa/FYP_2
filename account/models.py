@@ -79,11 +79,12 @@ class CASE(models.Model):
     file=models.ForeignKey(File,on_delete=models.CASCADE)
     case_title=models.CharField(max_length=60,default="New Case")
     lawyer=models.ForeignKey(Lawyer,on_delete=models.CASCADE)
-    ratings = models.DecimalField(max_digits=2, decimal_places=1, default=1, validators=[MinValueValidator(1), MaxValueValidator(5)])  # noqa: F821
+    ratings = models.DecimalField(max_digits=2, decimal_places=1, default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])  # noqa: F821
     case_status=models.CharField(max_length=7, choices=STATUS_CHOICES, default=VICTORY)
     case_approval=models.BooleanField(default=False)
     status_saved=models.BooleanField(default=False)
 
+    is_rated=models.BooleanField(default=False)
     is_running=models.BooleanField(default=True)
 
     def __str__(self):

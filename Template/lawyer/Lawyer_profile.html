@@ -1,9 +1,12 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{data.username}}</title>
+    <link rel="stylesheet" href="{%static 'css/styling.css'%}">
+
     <script src="https://kit.fontawesome.com/your-font-awesome-kit-id.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Include Font Awesome CSS -->
 
@@ -26,7 +29,7 @@
         <li class="nav-item" style="margin-right:20%; font-family:'palatino linotype';">
           <a class="nav-link" href="/" style="display:block; color:#000;">
      
-            <h5><i><strong>Lawyer Management System</strong></i>
+            <h5><i><strong>Lawyer Recommendation System</strong></i>
             </h5>       </a></li>
             <li class="nav-item">
               <a class="nav-link" href="/home">Home</a>
@@ -67,44 +70,101 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-4 mb-4">
-                <img src="{{data.profile_picture.url}}" alt="Profile Picture" class="profile-picture img-fluid">
-            </div>
-            <div class="col-md-8">
-                <h1>{{data.username}}</h1>
-                <p><strong>Location:</strong> {{data.location}}</p>
-                <p><strong>Phone:</strong> +977-{{data.phone}}</p>
-                <p><strong>Field of Expertise:</strong> {{data.specialization_tags}}</p>
-                <h3>Profile Description:</h3>
-                <p>{{data.profile_description}}</p>
-                <p>Rating: {{data.ratings}}<i class="fas fa-star rating-star" data-rating="1"></i></p>
-                <a href="connect"><input type="button" value="Connect"></a>
-            </div>
-        </div>
-    </div>
-
-    <br>
-    <div class="section">
-      <div class="card justify-content-center align-items-left" style="padding-left:12%;"><u><h1>Past cases</h1></u></div>
-      <br><div class="row d-flex justify-content-center align-items-center h-100">
-      <br>
-      {%for case in cases%}
-      <div class="container">
-            <div class="card">
-              <p><b>Case Title: {{case.file.file_title}}</b></p>
-                <p><b>Client: {{case.file.client.username}}</b></p>
-                <p>{{case.file.file_description}}</p>
-                <p>Rating: {{case.ratings}}<i class="fas fa-star rating-star" data-rating="1"></i></p>        
-              <p>Case Result:
-                <input type="text" id="result" name="result" disabled value="{{case.case_status}}">
-            </div> <br>
+          <div class="col-md-4 mb-4">
+            <img src="{{data.profile_picture.url}}" alt="Profile Picture" class="profile-picture img-fluid">
           </div>
-            {%endfor%}
+          <div class="col-md-8">
+            <h1>{{data.username}}</h1>
+            <p><strong>Location:</strong> {{data.location}}</p>
+            <p><strong>Phone:</strong> +977-{{data.phone}}</p>
+            <p><strong>Field of Expertise:</strong> {{data.specialization_tags}}</p>
+            <h3>Profile Description:</h3>
+            <p>{{data.profile_description}}</p>
+            <p>Rating: {{data.ratings}}<i class="fas fa-star rating-star" data-rating="1"></i></p>
+            <p>Win-percentage : {{percentage}}%</p>
+            
+            <a href="connect"><input type="button" value="Connect"></a>
+          </div>
+        </div>
+        
+        <br>
+        <div class="about">
+          <div class="container">
+            <div class="row">
+
+                <div class="about-col-2">
+                  <h1 class="Subtitle">Work Cases</h1>                              
+                  <div class="tab-titles">
+                    <p class="tab-links active-link" onclick="opentab('skills')">Ongoing cases</p>
+                    <p class="tab-links" onclick="opentab('experience')">Past Cases</p>
+                  </div>
+                  <div class="tab-contents active-tab" id="skills">
+                    {%if runningcase%}
+                    {%for runningcase in runningcases%}
+                    <div class="card justify-content-center">
+                      
+                      <ul>
+                        <li><h4>{{runningcase.file.file_title}}</h4>Client name : {{runningcase.file.client.username}}<br>
+                          {{runningcase.file.file_description}}</li>
+                        </ul>
+                      </div>
+                      <br>
+                      {%endfor%}
+                      {%else%}
+                      
+                      <div style="text-align: center; margin-top: 100px;">
+                          <h1>Wow, Such Empty!</h1>
+                          <p>This section doesn't have any ongoing cases.</p>
+                        </div>
+                        {%endif%}<br><br>
+                      </div>
+                      <div class="tab-contents" id="experience">
+                        {%if pastcases%}
+                        {%for pastcase in pastcases%}
+                        <div class="card justify-content-center">
+                          <ul>
+                            <li><h4>{{pastcase.file.file_title}}</h4>Client name : {{pastcase.file.client.username}}
+                              <br>{{pastcase.file.file_description}} <br>Ratings : {{pastcase.ratings}}<i class="fas fa-star rating-star" data-rating="1"></i>
+                              <br>Result :<strong> {{pastcase.case_status}}</strong></li>
+                            </ul>
+                          </div>
+                          <br>
+                          {%endfor%}
+                          {%else%} 
+                      <div style="text-align: center; margin-top: 100px;">
+                        <h1>Wow, Such Empty!</h1>
+                        <p>This section doesn't have any past cases.</p>
+                      </div>
+                      {%endif%}<br><br>
+                    </div>
+                        </div>
+            </div> 
+        </div>
       </div>
     </div>
+  </div>
       <!-- Bootstrap JS (optional) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script>
+        var tablinks=document.getElementsByClassName("tab-links");
+        var tabcontents=document.getElementsByClassName("tab-contents");
+        function opentab(tabname){
+          for(tablink of tablinks){
+            tablink.classList.remove("active-link");
+            
+          }
+          for(tabcontent of tabcontents){
+            tabcontent.classList.remove("active-tab");
+          }
+          event.currentTarget.classList.add("active-link");
+          document.getElementById(tabname).classList.add("active-tab");
+          
+        }
+      
+      </script>
+
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+
+  </body>
 </html>

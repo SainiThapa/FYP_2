@@ -82,7 +82,7 @@
 .tab-links::after{
     content:'';
     width:0;
-    height: 6px;
+    height: 4px;
     background: #000000;
     position: absolute;
     left:0px;

@@ -64,8 +64,18 @@ def lawyer_list(request):
 
 def lawyer(request,num):
     data=Lawyer.objects.get(user_id=num)
-    cases=CASE.objects.filter(lawyer_id=num,case_approval=True)
-    return render(request,"lawyer/Lawyer_profile.html",{"data":data,"cases":cases})
+    cases=CASE.objects.filter(lawyer_id=num,case_approval=True,is_running=False,is_rated=True)
+   
+    woncases=CASE.objects.filter(lawyer_id=num,case_approval=True,is_running=False,is_rated=True,case_status="VICTORY")
+    try:
+        sum=format(woncases.count()*100/cases.count(),".2f")
+        percentage=(sum)
+    except:
+        percentage=0
+    runningcases=CASE.objects.filter(lawyer_id=num, case_approval=True,is_running=True)
+    pastcases=CASE.objects.filter(lawyer_id=num, case_approval=True,is_running=False)   
+
+    return render(request,"lawyer/Lawyer_profile.html",{"data":data,"runningcases":runningcases,"pastcases":pastcases,'percentage':percentage})
 
 def create_file(request):
     if request.method=='POST':
@@ -127,10 +137,12 @@ def my_profile(request):
     lawyer = Lawyer.objects.filter(user_id=user.id).first()
     if lawyer:
         cases=CASE.objects.filter(lawyer_id=lawyer.user_id,case_approval=True)
-        totalcase=(cases.count())
+
+        ratedcases=CASE.objects.filter(lawyer_id=lawyer.user_id,case_approval=True,is_running=False,is_rated=True)
+        totalcase=(ratedcases.count())
         totalratings=0
         try:
-            for i in cases:
+            for i in ratedcases:
                 totalratings=totalratings+i.ratings
             rate=format(totalratings/totalcase,".2f")
             lawyer.ratings=rate
@@ -138,6 +150,10 @@ def my_profile(request):
         except:
             lawyer.ratings=totalratings
             lawyer.save()            
+        
+        victorycases=CASE.objects.filter(lawyer_id=lawyer.user_id,case_approval=True,is_running=False,is_rated=True,case_status="VICTORY")
+        noofwins=victorycases.count()
+        winpercentage=format((noofwins*100/totalcase),".2f")
 
         if(request.method=="POST"):
             result=request.POST.get("result")
@@ -154,7 +170,7 @@ def my_profile(request):
             return redirect("/my_profile")
         runningcases=CASE.objects.filter(lawyer_id=lawyer.user_id, case_approval=True,is_running=True)
         pastcases=CASE.objects.filter(lawyer_id=lawyer.user_id, case_approval=True,is_running=False)
-        return render(request,"lawyer/lawyer_myprofile.html",{'user':lawyer,'cases':cases,'a':False,'runningcases':runningcases,'pastcases':pastcases})
+        return render(request,"lawyer/lawyer_myprofile.html",{'user':lawyer,'cases':cases,'a':False,'runningcases':runningcases,'pastcases':pastcases,'winpercentage':winpercentage})
         
     return render(request,"auth/404.html")
 
@@ -266,10 +282,9 @@ def acceptedCases(request):
         rating_id=rate.split(" ")
         rating=rating_id[0]
         file_id=rating_id[1]
-
-
         case=CASE.objects.filter(file_id=file_id,case_approval=True).first()
         case.ratings=rating
+        case.is_rated=True
         case.save()
         print(case)
         return redirect("/acceptedCases",{'flag':True})
@@ -281,12 +296,12 @@ def casestatus(request):
         case_status=request.POST.get("case_status")
         running=request.POST.get("is_running")
         fileid=request.POST.get("fileid")
-
         currentcase=CASE.objects.filter(file_id=fileid).first()
-        currentcase.case_status=case_status
-
         currentcase.is_running=running        
-        currentcase.save()
+        if(case_status==""):
+            pass
+        else:
+            currentcase.case_status=case_status
         print(currentcase)
         return redirect('/my_profile')
     cases=CASE.objects.filter(lawyer_id=request.user.id,case_approval=True)

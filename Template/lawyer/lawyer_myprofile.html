@@ -36,7 +36,7 @@
           <ul class="nav nav-tabs card-header-tabs justify-content-end"> 
             <li class="nav-item" style="margin-right:20%; font-family:'palatino linotype';">
             <a class="nav-link" href="/" style="display:block; color:#000;">
- <h5><i><strong>Lawyer Management System</strong></i>
+ <h5><i><strong>Lawyer Recommendation System</strong></i>
  </h5>       </a></li>
             <li class="nav-item">
                   <a class="nav-link {% if active == 'home' %}active{% endif %}" href="/home">Home</a>
@@ -83,12 +83,12 @@
           </div>
           <div class="p-4 text-black" style="background-color: #f8f9fa;">
             <div class="d-flex justify-content-end text-center py-1">
-              <div>
-                <p class="mb-1 h5">Phone</p>
-                <p class="small text-muted mb-0">+977-{{user.phone}}</p>
+              <div style="margin-right:15px;">
+                <p class="mb-1 h5">Win % </p>
+                <p class="small text-muted mb-0">{{winpercentage}}%  </p>
               </div>
               <div>
-                <p class="mb-1 h5">Rating</p>
+                <p class="mb-1 h5"> Rating</p>
                 <p class="small text-muted mb-0">{{user.ratings}}<i class="fas fa-star rating-star" data-rating="1"></i></p>
               </div>
               <div class="px-3">
@@ -125,8 +125,8 @@
                                   <div class="card justify-content-center">
 
                                     <ul>
-                                      <li><h4>{{runningcase.file.file_title}}</h4>Client name   : {{runningcase.file.client.username}}
-                                        <br>{{runningcase.file.file_description}} <br>Ratings : {{runningcase.ratings}}<i class="fas fa-star rating-star" data-rating="1"></i></li>
+                                      <li><h4>{{runningcase.file.file_title}}</h4>Client name : {{runningcase.file.client.username}}<br>
+                                        {{runningcase.file.file_description}}</li>
                                       </ul>
                                     </div>
                                     <br>
@@ -136,8 +136,9 @@
                                 {%for pastcase in pastcases%}
                                 <div class="card justify-content-center">
                                   <ul>
-                                    <li><h4>{{pastcase.file.file_title}}</h4>Client name:{{pastcase.file.client.username}}
-                                      <br>{{pastcase.file.file_description}} <br>Ratings : {{pastcase.ratings}}<i class="fas fa-star rating-star" data-rating="1"></i></li>
+                                    <li><h4>{{pastcase.file.file_title}}</h4>Client name : {{pastcase.file.client.username}}
+                                      <br>{{pastcase.file.file_description}} <br>Ratings : {{pastcase.ratings}}<i class="fas fa-star rating-star" data-rating="1"></i>
+                                    <br>Result :<strong> {{pastcase.case_status}}</strong></li>
                                     </ul>
                                   </div>
                                   <br>
