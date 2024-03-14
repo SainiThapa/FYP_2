@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from account.models import CASE, Connection, File, Lawyer,User, Client
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .recommend import get_recommendations
+from .recommend import get_recommendations, preprocess
 # Create your views here.
 
 def handle_404(request, exception):
@@ -100,15 +100,17 @@ def create_file(request):
         lawyer_ids=[]
         # case_id=[]
         print(case_dict)
-        for search in fileinfo.split():
-            recommendations=get_recommendations(search, case_dict)
-            for doc, similarity in recommendations:
-                if similarity>0.5:
-                    # case_id.append(doc)
-                    case = CASE.objects.get(id=doc)
-                    related_lawyers = case.lawyer.all()
-                    lawy_ids = [lawyer.user_id for lawyer in related_lawyers]
-                    lawyer_ids.append(lawy_ids)
+
+        # newfileinfo=preprocess(fileinfo)
+
+        # for search in newfileinfo:
+        recommendations=get_recommendations(fileinfo, case_dict)
+        for doc, similarity in recommendations:
+            if similarity>0.5:
+                # case_id.append(doc)
+                case = CASE.objects.get(id=doc)
+                related_lawyers = case.lawyer.user_id
+                lawyer_ids.append(related_lawyers)
 
 
       
@@ -323,11 +325,12 @@ def casestatus(request):
         fileid=request.POST.get("fileid")
         currentcase=CASE.objects.filter(file_id=fileid).first()
         currentcase.is_running=running        
-        if(case_status==""):
+        if(case_status is None):
             pass
         else:
             currentcase.case_status=case_status
         print(currentcase)
+        currentcase.save()
         return redirect('/my_profile')
     cases=CASE.objects.filter(lawyer_id=request.user.id,case_approval=True)
     return render(request,'lawyer/casestatus.html',{'cases':cases})
