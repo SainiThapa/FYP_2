@@ -66,7 +66,7 @@ class File(models.Model):
     filetags=models.TextField()
 
     def __str__(self):
-        return f"{self.client.username} - {self.file_id} - {self.file_description}"
+        return f"{self.client.username} - {self.file_id} - {self.file_title}"
     
 
 class CASE(models.Model):
@@ -109,3 +109,7 @@ class Connection(models.Model):
             newcase.case_approval=True
             newcase.save()
         super().save(*args, **kwargs)
+
+    
+    def __str__(self):
+         return f"{self.case.case_title} : {self.connect_status} - {self.lawyer.username} - {self.client.username}"

@@ -1,0 +1,27 @@
+Entertainment Law
+
+
+
+from Bikram to Manoj Khatri
+    File Title: "Film Production Contract - Movie Production Agreement"
+    File Description: "This file contains our film production contract, detailing the terms and conditions for the production of our movie project. It includes agreements with producers, directors, cast, crew, and vendors involved in the filmmaking process. Our goal is to establish clear rights, obligations, and compensation arrangements to ensure a successful and legally compliant film production."
+
+from Samir to Manoj Khatri	
+    File Title: "Music Licensing Agreement - Song Licensing Contract"
+    File Description: "This file encompasses our music licensing agreement, governing the licensing and use of our original songs for commercial purposes. It includes agreements with music publishers, recording labels, and distributors for the exploitation of our musical compositions. Our objective is to negotiate favorable licensing terms, protect our copyright interests, and maximize revenue from music licensing deals."
+
+from Tilak to Sushil Khadka	
+    File Title: "Talent Representation Contract - Artist Management Agreement"
+    File Description: "This file documents our talent representation contract with an artist management agency, outlining the terms of representation and career development services. It includes agreements with talent agents, managers, and entertainment lawyers representing our interests in the entertainment industry. Our goal is to secure effective representation, advance our career goals, and maximize opportunities for success."
+
+from Tirtha to Ashok Gurung
+    File Title: "Television Production Deal - TV Show Development Agreement"
+    File Description: "This file outlines our television production deal, including agreements for the development, production, and distribution of our television show concept. It encompasses contracts with production companies, networks, talent, and sponsors involved in the TV production process. Our objective is to negotiate favorable terms, protect our creative rights, and ensure the successful execution of our TV project."
+
+from Mohit to Anand Dhakal
+    File Title: "Merchandising Agreement - Brand Licensing Contract"
+    File Description: "This file contains our merchandising agreement, governing the licensing and distribution of merchandise bearing our brand or intellectual property. It includes contracts with manufacturers, distributors, and retailers for the production and sale of branded products. Our goal is to expand our brand presence, generate additional revenue streams, and maintain quality control over licensed merchandise."
+
+from Aseem to Anand Dhakal
+    File Title: "Entertainment Litigation - Contract Dispute Resolution"
+    File Description: "This file documents our legal action to resolve contract disputes or breaches in the entertainment industry. It includes litigation complaints, pleadings, and evidence supporting our claims or defenses. Our objective is to enforce our contractual rights, seek remedies for damages or breaches, and achieve a fair and equitable resolution through litigation or alternative dispute resolution methods."

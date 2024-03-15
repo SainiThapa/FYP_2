@@ -1,0 +1,31 @@
+REAL ESTATE LAW
+
+from Nishant to Sarita Shrestha
+
+1. File Title: "Property Purchase Agreement - Real Estate Sale Contract"
+   File Description: "This file contains our property purchase agreement, outlining the terms and conditions for the sale of real estate property. It includes agreements with sellers, buyers, and real estate agents involved in the transaction. Our goal is to negotiate favorable purchase terms, conduct due diligence, and ensure a smooth and legally compliant real estate transaction."
+
+from Roshan to Sarita Shrestha
+
+2. File Title: "Lease Agreement - Commercial Property Lease Contract"
+   File Description: "This file encompasses our lease agreement for commercial property, establishing the terms of lease and occupancy rights. It includes contracts with landlords, tenants, and property managers for the rental of office, retail, or industrial space. Our objective is to negotiate lease terms that meet our business needs, protect our interests, and comply with applicable real estate laws."
+
+from Raaj to Ramesh Joshi
+
+3. File Title: "Title Search Report - Property Title Examination"
+   File Description: "This file documents our title search report, conducted to verify ownership rights and identify any encumbrances or defects affecting real property title. It includes title search findings, chain of title documents, and legal opinions on title issues. Our goal is to ensure clear and marketable title to the property, mitigate title risks, and facilitate real estate transactions with confidence."
+
+from Santosh to Ramesh Joshi
+
+4. File Title: "Zoning and Land Use Permit - Development Approval Application"
+   File Description: "This file outlines our application for zoning and land use permits, seeking regulatory approval for real estate development projects. It includes permit applications, site plans, and communication with local planning authorities. Our objective is to obtain necessary permits, comply with zoning regulations, and facilitate the lawful development and use of real property."
+
+from Sagar to Manoj Khatri
+
+5. File Title: "Foreclosure Defense - Mortgage Default Litigation"
+   File Description: "This file documents our defense strategy against foreclosure proceedings initiated by mortgage lenders. It includes foreclosure defense pleadings, legal notices, and evidence supporting defenses to mortgage default. Our goal is to protect our property rights, explore foreclosure alternatives, and negotiate favorable resolutions to avoid foreclosure and preserve homeownership."
+
+from Niroj Thapa to Manoj Khatri
+
+6. File Title: "Property Tax Assessment Appeal - Tax Assessment Challenge"
+   File Description: "This file encompasses our appeal of property tax assessments, challenging the valuation and assessment of real estate property for tax purposes. It includes tax assessment appeals, appraisal reports, and evidence supporting adjustments to property tax assessments. Our objective is to reduce property tax liabilities, achieve fair and equitable property valuations, and ensure compliance with tax laws."

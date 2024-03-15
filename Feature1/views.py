@@ -59,14 +59,13 @@ def lawyer_list(request):
     for lawyer in lawyers:
         if(lawyer.license_verify_status):
             approvedLawyer.append(lawyer)
-            
-    return render(request,"Lawyer/index-1.html",{"lawyers":approvedLawyer,'a':True})
+    sortedlawyers=sorted(approvedLawyer,key=lambda x: x.ratings,reverse=True)
+    return render(request,"Lawyer/index-1.html",{"lawyers":sortedlawyers,'a':True})
 
 def lawyer(request,num):
     data=Lawyer.objects.get(user_id=num)
-    cases=CASE.objects.filter(lawyer_id=num,case_approval=True,is_running=False,is_rated=True)
-   
-    woncases=CASE.objects.filter(lawyer_id=num,case_approval=True,is_running=False,is_rated=True,case_status="VICTORY")
+    cases=CASE.objects.filter(lawyer_id=num,case_approval=True,is_running=False)
+    woncases=CASE.objects.filter(lawyer_id=num,case_approval=True,is_running=False,case_status="VICTORY")
     try:
         sum=format(woncases.count()*100/cases.count(),".2f")
         percentage=(sum)
@@ -164,7 +163,6 @@ def my_profile(request):
     lawyer = Lawyer.objects.filter(user_id=user.id).first()
     if lawyer:
         cases=CASE.objects.filter(lawyer_id=lawyer.user_id,case_approval=True)
-
         ratedcases=CASE.objects.filter(lawyer_id=lawyer.user_id,case_approval=True,is_running=False,is_rated=True)
         totalcase=(ratedcases.count())
         totalratings=0
@@ -177,11 +175,13 @@ def my_profile(request):
         except:
             lawyer.ratings=totalratings
             lawyer.save()            
-        
+
+        pastcases=CASE.objects.filter(lawyer_id=lawyer.user_id, case_approval=True,is_running=False)
+                
         try:
-            victorycases=CASE.objects.filter(lawyer_id=lawyer.user_id,case_approval=True,is_running=False,is_rated=True,case_status="VICTORY")
+            victorycases=CASE.objects.filter(lawyer_id=lawyer.user_id,case_approval=True,is_running=False,case_status="VICTORY")
             noofwins=victorycases.count()
-            winpercentage=format((noofwins*100/totalcase),".2f")
+            winpercentage=format((noofwins*100/pastcases.count()),".2f")
         except:
             winpercentage="N/A"
         if(request.method=="POST"):
@@ -198,7 +198,6 @@ def my_profile(request):
             case.save()
             return redirect("/my_profile")
         runningcases=CASE.objects.filter(lawyer_id=lawyer.user_id, case_approval=True,is_running=True)
-        pastcases=CASE.objects.filter(lawyer_id=lawyer.user_id, case_approval=True,is_running=False)
         return render(request,"lawyer/lawyer_myprofile.html",{'user':lawyer,'cases':cases,'a':False,'runningcases':runningcases,'pastcases':pastcases,'winpercentage':winpercentage})
         
     return render(request,"auth/404.html")
@@ -316,6 +315,18 @@ def acceptedCases(request):
         case.is_rated=True
         case.save()
         print(case)
+        lawyer=case.lawyer
+        try:
+            allcases=CASE.objects.filter(lawyer_id=lawyer.user_id,case_approval=True,is_rated=True,is_running=False)
+            count=allcases.count()
+            totalrating=0
+            for case in allcases:
+                totalrating=totalrating+case.ratings
+            avgrating=totalrating/count
+            lawyer.ratings=avgrating
+            lawyer.save()
+        except:
+            pass
         return redirect("/acceptedCases",{'flag':True})
     return render(request, "client/acceptedCases.html",{'cases':cases,'a':True,'flag':flag})
 

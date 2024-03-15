@@ -73,6 +73,7 @@
           <div class="row">
               <div class="about-col-2">
                 <h1 class="Subtitle">Accepted Cases</h1>                              
+
                 <div class="tab-titles">
                     <p class="tab-links active-link" onclick="opentab('skills')">Ongoing cases</p>
                     <p class="tab-links" onclick="opentab('experience')">Completed cases</p>
@@ -97,26 +98,29 @@
                     {%for case in cases%}
                     {%if not case.is_running%}
                     <div class="card justify-content-center">
-                    <ul>
-                      <li><label for="case_title"><h4>Case title : {{case.case_title}}</label></h4>
-                        Approved by : {{case.lawyer.username}}
-                        <label for="lawyer_name">Case Result : {{case.case_status}}</label>
-                        <label for="rating">Rating:
-                          <select id="rating" name="rating" >
-                            <option value="{{case.ratings}} {{case.file_id}}" selected>{{case.ratings}}</option>
+                      <ul>
+                        <li><label for="case_title"><h4>Case title : {{case.case_title}}</label></h4>
+                          Approved by : {{case.lawyer.username}}
+                          <label for="lawyer_name">Case Result : {{case.case_status}}</label>
+                          <label for="rating">Rating:
+                            <select id="rating" name="rating" >
+                            {%if not case.is_rated%}
                             <option value="1 {{case.file_id}}">1</option>
                             <option value="2 {{case.file_id}}">2</option>
                             <option value="3 {{case.file_id}}">3</option>
                             <option value="4 {{case.file_id}}">4</option>
                             <option value="5 {{case.file_id}}">5</option>
+                            {%else%}
+                            <option value="{{case.ratings}} {{case.file_id}}" disabled selected>{{case.ratings}}</option>
+                            {%endif%}
                           </select>
                         </label>
                         <input type="submit" value="Submit">
                       </li>
                       </ul>
                     </div>
-
                     <br>
+                  
                     {%endif%}
                     {%endfor%}
                   </form>
@@ -125,27 +129,6 @@
           </div>
       </div>
       </div>
-      <!-- <form method="POST">
-        {%csrf_token%}
-        <label for="case_title"><b>Case Title:</b> {{case.case_title}}</label>
-        <label for="lawyer_name"><b>Approved By Lawyer Name:</b> {{case.lawyer}}</label>
-        <label for="lawyer_status"><b>Case Status: </b> {{case.is_running}}</label>
-        
-        {%if not case.is_running%}
-        <label for="lawyer_name"><b>Case Result:</b>{{case.case_status}}</label>
-        <label for="rating">Rating:
-    <select id="rating" name="rating" >
-      <option value="{{case.ratings}} {{case.file_id}}" selected>{{case.ratings}}</option>
-      <option value="1 {{case.file_id}}">1</option>
-      <option value="2 {{case.file_id}}">2</option>
-      <option value="3 {{case.file_id}}">3</option>
-      <option value="4 {{case.file_id}}">4</option>
-      <option value="5 {{case.file_id}}">5</option>
-    </select>
-  </label>
-  <input type="submit" value="Submit">
-  {%endif%}
-</form> -->
 </div>
 </div>
 

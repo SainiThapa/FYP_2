@@ -1,0 +1,30 @@
+PERSONAL INJURY LAW
+
+from Vishan to Anand Dhakal 
+
+1. File Title: "Injury Claim Documentation - Personal Injury Case File"
+   File Description: "This file contains documentation related to our personal injury claim, detailing the circumstances of the accident and resulting injuries. It includes accident reports, medical records, and correspondence with insurance companies. Our goal is to pursue compensation for our injuries, medical expenses, and lost wages resulting from the accident."
+
+from Subash to Anand Dhakal 
+2. File Title: "Demand Letter - Personal Injury Settlement Demand"
+   File Description: "This file encompasses our demand letter sent to the at-fault party or their insurance company, seeking compensation for our personal injury damages. It includes a detailed summary of our injuries, medical treatment, and financial losses, along with a settlement demand amount. Our objective is to negotiate a fair and equitable settlement to resolve our personal injury claim."
+
+from Prabesh to Anand Dhakal 
+
+3. File Title: "Medical Treatment Records - Injury Treatment Documentation"
+   File Description: "This file documents our medical treatment and rehabilitation efforts following the accident. It includes medical records, diagnostic test results, and treatment plans from healthcare providers. Our goal is to ensure comprehensive documentation of our injuries, medical expenses, and ongoing treatment needs to support our personal injury claim."
+
+from Ronit to Ramesh Joshi
+
+4. File Title: "Expert Witness Consultation - Medical Expert Evaluation"
+   File Description: "This file outlines our consultation with expert witnesses, such as medical professionals, to assess the nature and extent of our injuries. It includes expert opinions, medical reports, and deposition transcripts from expert witness testimony. Our objective is to establish the severity of our injuries, causation, and prognosis to strengthen our personal injury case."
+
+from Aseem to Ramesh Joshi
+
+5. File Title: "Negligence Complaint - Lawsuit Filing Against Defendant"
+   File Description: "This file encompasses our negligence complaint filed against the negligent party responsible for our injuries. It includes legal pleadings, summons, and complaints served on the defendant. Our goal is to initiate legal action, hold the negligent party accountable for their actions, and seek damages for our personal injury losses through litigation."
+
+from Prishni to Ramesh Joshi
+
+6. File Title: "Settlement Agreement - Personal Injury Settlement Documentation"
+   File Description: "This file contains our settlement agreement reached with the at-fault party or their insurance company to resolve our personal injury claim. It includes settlement agreements, release forms, and documentation of settlement payments. Our objective is to finalize a settlement that fairly compensates us for our injuries and closes our personal injury case."
