@@ -84,7 +84,7 @@ def client_registration(request):
                                       profile_picture=profile_picture,location=location,phone=phone)
                                 client.save()
                                 print('USER CREATED !')
-                                return redirect('account/login')
+                                return redirect('/account/login')
             else:
                 messages.info(request,"Password doesnot match !!")
                 return redirect('account/register/client')

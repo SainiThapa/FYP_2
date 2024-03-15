@@ -178,10 +178,12 @@ def my_profile(request):
             lawyer.ratings=totalratings
             lawyer.save()            
         
-        victorycases=CASE.objects.filter(lawyer_id=lawyer.user_id,case_approval=True,is_running=False,is_rated=True,case_status="VICTORY")
-        noofwins=victorycases.count()
-        winpercentage=format((noofwins*100/totalcase),".2f")
-
+        try:
+            victorycases=CASE.objects.filter(lawyer_id=lawyer.user_id,case_approval=True,is_running=False,is_rated=True,case_status="VICTORY")
+            noofwins=victorycases.count()
+            winpercentage=format((noofwins*100/totalcase),".2f")
+        except:
+            winpercentage="N/A"
         if(request.method=="POST"):
             result=request.POST.get("result")
             res=result.split(" ")
