@@ -11,6 +11,10 @@ after
 again
 against
 all
+allow
+allows
+allowed
+allowing
 almost
 alone
 along
@@ -67,13 +71,20 @@ can
 cannot
 case
 cases
+cause
+causes
+caused
 certain
 certainly
 clear
 clearly
 come
+contain
+contains
 could
 d
+detail
+detailed
 did
 differ
 different
@@ -112,6 +123,7 @@ facts
 far
 felt
 few
+file
 find
 finds
 first
@@ -134,6 +146,7 @@ give
 given
 gives
 go
+goal
 going
 good
 goods
@@ -168,6 +181,8 @@ i
 if
 important
 in
+include
+includes
 interest
 interested
 interesting
@@ -298,6 +313,9 @@ quite
 r
 rather
 really
+related
+require
+required
 right
 right
 room
@@ -311,6 +329,7 @@ says
 second
 seconds
 see
+seek
 seem
 seemed
 seeming

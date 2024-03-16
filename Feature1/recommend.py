@@ -75,7 +75,7 @@ def cosine_similarity(vec1, vec2):
     else:
         return dot_product / (norm_vec1 * norm_vec2)
 
-def get_recommendations(search_history, documents):
+def get_recommendations(fileinfo, documents):
     cleaned_documents = clean_documents(documents)
     vocabulary = list(set([term for document in cleaned_documents for term in document.split()]))
     tfidf_matrix = []
@@ -84,7 +84,7 @@ def get_recommendations(search_history, documents):
         tf_idf_vector = fit_document(document, vocabulary, cleaned_documents)
         tfidf_matrix.append((key, tf_idf_vector))
 
-    search_tfidf = fit_document(search_history, vocabulary, cleaned_documents)
+    search_tfidf = fit_document(fileinfo, vocabulary, cleaned_documents)
     similarities = []
     for _, doc_tfidf in tfidf_matrix:
         similarities.append(cosine_similarity(search_tfidf, doc_tfidf))

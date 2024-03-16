@@ -17,8 +17,8 @@ File Description: "This file documents our company's Chapter 11 bankruptcy filin
 
 
 from Sandeep to Tilak Adhikari
-file title - Debt Repayment Plan - BankruptcyThis file outlines our proposed debt repayment plan under Chapter 13 bankruptcy protection. It includes a comprehensive analysis of our income, expenses, and creditor obligations, along with a proposed repayment schedule designed to satisfy creditor claims over a specified period. Our objective is to restructure our debts in a manageable manner, preserving essential assets and avoiding liquidation.
-description -  
+file title - Debt Repayment Plan - Bankruptcy
+File description - This file outlines our proposed debt repayment plan under Chapter 13 bankruptcy protection. It includes a comprehensive analysis of our income, expenses, and creditor obligations, along with a proposed repayment schedule designed to satisfy creditor claims over a specified period. Our objective is to restructure our debts in a manageable manner, preserving essential assets and avoiding liquidation.
 
 
 from Niroj to Anand Dhakal

@@ -87,9 +87,7 @@ def create_file(request):
         user=Client.objects.get(user_id=currentuser.id)
         file=File.objects.create(client=user,file_title=filetitle,file_description=filedesc,filetags=filetags)
         file.save()
-      
         
-
         fileinfo=filetitle+" " +filedesc
         case_dict={}
         cases=CASE.objects.filter(case_approval=True,is_running=False,is_rated=True,case_status="VICTORY")
@@ -98,20 +96,18 @@ def create_file(request):
                     case_dict[case.id]=case.case_title+" " +case.file.file_description
         lawyer_ids=[]
         # case_id=[]
-        print(case_dict)
 
         # newfileinfo=preprocess(fileinfo)
 
         # for search in newfileinfo:
         recommendations=get_recommendations(fileinfo, case_dict)
         for doc, similarity in recommendations:
-            if similarity>0.5:
+            print(doc,similarity)
+            if similarity>0.1:
                 # case_id.append(doc)
                 case = CASE.objects.get(id=doc)
                 related_lawyers = case.lawyer.user_id
                 lawyer_ids.append(related_lawyers)
-
-
       
     #   OLD ALGORITHM
         # lawyer_dict = {}
@@ -129,7 +125,14 @@ def create_file(request):
         #             lawyer_ids.append(doc)
                 # break
         filtered_lawyers = Lawyer.objects.filter(user_id__in=lawyer_ids)
-        print(filtered_lawyers)
+
+        if not filtered_lawyers:
+            lawyer_ids=[]
+            for case in cases:
+                if case.file.filetags==filetags:
+                    lawyer_ids.append(case.lawyer_id)
+            filtered_lawyers=Lawyer.objects.filter(user_id__in=lawyer_ids)
+            
         sortedlawyers=sorted(filtered_lawyers,key=lambda x: x.ratings,reverse=True)
         # for user in Client.objects.all():
         #     if currentuser.username ==user.username:
@@ -306,27 +309,31 @@ def acceptedCases(request):
     cases=[connection.case for connection in connections]
     flag=False
     if request.method=="POST":
-        rate=request.POST.get("rating")
-        rating_id=rate.split(" ")
-        rating=rating_id[0]
-        file_id=rating_id[1]
-        case=CASE.objects.filter(file_id=file_id,case_approval=True).first()
-        case.ratings=rating
-        case.is_rated=True
-        case.save()
-        print(case)
-        lawyer=case.lawyer
-        try:
-            allcases=CASE.objects.filter(lawyer_id=lawyer.user_id,case_approval=True,is_rated=True,is_running=False)
-            count=allcases.count()
-            totalrating=0
-            for case in allcases:
-                totalrating=totalrating+case.ratings
-            avgrating=totalrating/count
-            lawyer.ratings=avgrating
-            lawyer.save()
-        except:
-            pass
+        for case in cases:
+            rate=request.POST.get("rating_"+str(case.file_id))
+            if rate is not None:
+                rating_id=rate.split(" ")
+                rating=rating_id[0]
+                file_id=rating_id[1]
+                case=CASE.objects.filter(file_id=file_id,case_approval=True).first()
+                case.ratings=rating
+                case.is_rated=True
+                case.save()
+                print(case)
+                lawyer=case.lawyer
+                try:
+                    allcases=CASE.objects.filter(lawyer_id=lawyer.user_id,case_approval=True,is_rated=True,is_running=False)
+                    count=allcases.count()
+                    totalrating=0
+                    for case in allcases:
+                        totalrating=totalrating+case.ratings
+                    avgrating=totalrating/count
+                    lawyer.ratings=avgrating
+                    lawyer.save()
+                except:
+                    pass
+            else:
+                pass
         return redirect("/acceptedCases",{'flag':True})
     return render(request, "client/acceptedCases.html",{'cases':cases,'a':True,'flag':flag})
 

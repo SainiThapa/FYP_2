@@ -56,7 +56,7 @@ def loginlawyer(request):
 def client_registration(request):
     if request.method=='POST':
         Clientname=request.POST.get('name')
-        profile_picture=request.POST.get('profile_picture')
+        profile_picture=request.FILES.get('profile_picture')
         location=request.POST.get('location')
         email=request.POST.get('email')
         phone=request.POST.get('phone')

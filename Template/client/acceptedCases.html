@@ -93,37 +93,35 @@
                     {%endfor%}
                 </div>
                 <div class="tab-contents" id="experience">
+                  {%for case in cases%}
+                  {%if not case.is_running%}
                   <form method="POST">
                     {%csrf_token%}
-                    {%for case in cases%}
-                    {%if not case.is_running%}
                     <div class="card justify-content-center">
-                      <ul>
-                        <li><label for="case_title"><h4>Case title : {{case.case_title}}</label></h4>
-                          Approved by : {{case.lawyer.username}}
-                          <label for="lawyer_name">Case Result : {{case.case_status}}</label>
-                          <label for="rating">Rating:
-                            <select id="rating" name="rating" >
-                            {%if not case.is_rated%}
+                    <ul>
+                      <li><label for="case_title"><h4>Case title : {{case.case_title}}</label></h4>
+                        Approved by : {{case.lawyer.username}}
+                        <label for="lawyer_name">Case Result : {{case.case_status}}</label>
+                        <!-- <label for="case id">Casefileid: {{case.file_id}}</label> -->
+                        <label for="rating_{{case.file_id}}">Rating:
+                          <select id="rating_{{case.file_id}}" name="rating_{{case.file_id}}" >
+                            <option value="{{case.ratings}} {{case.file_id}}" selected>{{case.ratings}}</option>
                             <option value="1 {{case.file_id}}">1</option>
                             <option value="2 {{case.file_id}}">2</option>
                             <option value="3 {{case.file_id}}">3</option>
                             <option value="4 {{case.file_id}}">4</option>
                             <option value="5 {{case.file_id}}">5</option>
-                            {%else%}
-                            <option value="{{case.ratings}} {{case.file_id}}" disabled selected>{{case.ratings}}</option>
-                            {%endif%}
                           </select>
                         </label>
                         <input type="submit" value="Submit">
                       </li>
                       </ul>
+                    </form>
                     </div>
+
                     <br>
-                  
                     {%endif%}
                     {%endfor%}
-                  </form>
                   </div>
               </div>
           </div>
