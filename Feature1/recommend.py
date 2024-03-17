@@ -38,8 +38,8 @@ def calculate_idf(term, cleaned_documents):
     else:
         return 0
 
-def preprocess(document):
-    terms = re.split(r'[,\s]+', document)
+def preprocess(file):
+    terms = re.split(r'[,\s]+', file)
     cleaned_terms = [
         remove_special_characters(term)
         for term in terms
@@ -47,13 +47,13 @@ def preprocess(document):
     ]
     return cleaned_terms
 
-def clean_documents(documents):
-    cleaned_documents = [
-        " ".join(preprocess(document)) for document in documents.values()
+def clean_files(files):
+    cleaned_files = [
+        " ".join(preprocess(file)) for file in files.values()
     ]
-    return cleaned_documents
+    return cleaned_files
 
-def fit_document(document, vocabulary, cleaned_documents):
+def tf_idf_vectorize(document, vocabulary, cleaned_documents):
     terms = preprocess(document)
     tf_idf_vector = np.zeros(len(vocabulary))
     tf = calculate_tf(terms)
@@ -75,19 +75,19 @@ def cosine_similarity(vec1, vec2):
     else:
         return dot_product / (norm_vec1 * norm_vec2)
 
-def get_recommendations(fileinfo, documents):
-    cleaned_documents = clean_documents(documents)
-    vocabulary = list(set([term for document in cleaned_documents for term in document.split()]))
+def get_recommendations(fileinfo, pastfiles):
+    cleaned_files = clean_files(pastfiles)
+    vocabulary = list(set([term for pastfile in cleaned_files for term in pastfile.split()]))
     tfidf_matrix = []
 
-    for key, document in documents.items():
-        tf_idf_vector = fit_document(document, vocabulary, cleaned_documents)
-        tfidf_matrix.append((key, tf_idf_vector))
+    for id, pastfile in pastfiles.items():
+        tf_idf_vector = tf_idf_vectorize(pastfile, vocabulary, cleaned_files)
+        tfidf_matrix.append((id, tf_idf_vector))
 
-    search_tfidf = fit_document(fileinfo, vocabulary, cleaned_documents)
+    fileinfo_tfidf = tf_idf_vectorize(fileinfo, vocabulary, cleaned_files)
     similarities = []
     for _, doc_tfidf in tfidf_matrix:
-        similarities.append(cosine_similarity(search_tfidf, doc_tfidf))
+        similarities.append(cosine_similarity(fileinfo_tfidf, doc_tfidf))
 
     sorted_indices = np.argsort(similarities)[::-1]
 

@@ -4,13 +4,17 @@
   {%load static%}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
+    <script src="{%static 'js/bootstrap.min.bundle.js'%}"></script>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/your-font-awesome-kit-id.js" crossorigin="anonymous"></script>
-    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesome/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesome/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesome/css/solid.css' %}" rel="stylesheet" type="text/css">
 
     <title>About Us</title>
 </head>
@@ -146,16 +150,15 @@
       
   <br><br><br>
       <div class="row o_grid_mode" data-row-count="10"><div class="o_grid_item g-col-lg-12 g-height-3 col-lg-12 o_colored_level" style="grid-area: 1 / 1 / 4 / 13; z-index: 1;"><h1 style="text-align: center; font-family:'Times New Roman', Times, serif"><strong>OUR TEAM</strong><br></h1><p><br></p></div>
-      
-      <div style="margin-left:12%;" class="o_cc o_cc1 rounded o_colored_level o_grid_item o_grid_item_image shadow g-height-8 g-col-lg-3 col-lg-3" style="z-index: 3; --grid-item-padding-y: 48px; --grid-item-padding-x: 15px; box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px 0px !important; text-align: center; grid-area: 3 / 10 / 11 / 13;">
-        <h4><img src="{%static 'img/blank.webp'%}" alt="" class="img img-fluid mx-auto o_we_custom_image" data-mimetype="image/webp" data-original-id="2500" data-original-src="{%static 'img/blank.webp'%}" data-mimetype-before-conversion="image/webp" data-resize-width="690" loading="lazy">Suraj Thapa<br></h4></div>
-        
-        <div class="o_cc o_cc1 rounded o_colored_level o_grid_item o_grid_item_image shadow g-height-8 g-col-lg-3 col-lg-3" style="z-index: 3; --grid-item-padding-y: 48px; --grid-item-padding-x: 15px; box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px 0px !important; text-align: center; grid-area: 3 / 6 / 11 / 9;">
-          <h4><img src="{%static 'img/blank.webp'%}" alt="" class="img img-fluid mx-auto o_we_custom_image" data-mimetype="image/webp" data-original-id="2500" data-original-src="{%static 'img/blank.webp'%}" data-mimetype-before-conversion="image/webp" data-resize-width="690" loading="lazy" >Saini Thapa Magar<br></h4></div>
-        
-          <div class="o_cc o_cc1 rounded o_colored_level o_grid_item o_grid_item_image g-col-lg-3 g-height-8 col-lg-3" style="box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px 0px !important; z-index: 2; --grid-item-padding-y: 48px; --grid-item-padding-x: 15px; text-align: center; grid-area: 3 / 2 / 11 / 5;">
-            <h4><img src="{%static 'img/blank.webp'%}" alt="" class="img img-fluid mx-auto o_we_custom_image" data-mimetype="image/webp" data-original-id="2500" data-original-src="{%static 'img/blank.webp'%}" data-mimetype-before-conversion="image/webp" data-resize-width="690" loading="lazy" style="">Nishant Kumpakha<br></h4></div>
-          </div>
+        <div style="margin-left: 12%; text-align:center;" class="o_cc o_cc1 rounded o_colored_level o_grid_item o_grid_item_image shadow g-height-8 g-col-lg-3 col-lg-3" style="z-index: 3; --grid-item-padding-y: 48px; --grid-item-padding-x: 15px; box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px 0px !important; text-align: center; grid-area: 3 / 10 / 11 / 13;">
+          <h4><img src="{%static 'img/blank.webp'%}" alt="" class="img img-fluid mx-auto o_we_custom_image" data-mimetype="image/webp" data-original-id="2500" data-original-src="{%static 'img/blank.webp'%}" data-mimetype-before-conversion="image/webp" data-resize-width="690" loading="lazy">Suraj Thapa<br></h4></div>
+          
+          <div class="o_cc o_cc1 rounded o_colored_level o_grid_item o_grid_item_image shadow g-height-8 g-col-lg-3 col-lg-3" style="z-index: 3; --grid-item-padding-y: 48px; --grid-item-padding-x: 15px; box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px 0px !important; text-align: center; grid-area: 3 / 6 / 11 / 9;">
+            <h4><img src="{%static 'img/blank.webp'%}" alt="" class="img img-fluid mx-auto o_we_custom_image" data-mimetype="image/webp" data-original-id="2500" data-original-src="{%static 'img/blank.webp'%}" data-mimetype-before-conversion="image/webp" data-resize-width="690" loading="lazy" >Saini Thapa Magar<br></h4></div>
+            
+            <div class="o_cc o_cc1 rounded o_colored_level o_grid_item o_grid_item_image g-col-lg-3 g-height-8 col-lg-3" style="box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px 0px !important; z-index: 2; --grid-item-padding-y: 48px; --grid-item-padding-x: 15px; text-align: center; grid-area: 3 / 2 / 11 / 5;">
+              <h4><img src="{%static 'img/blank.webp'%}" alt="" class="img img-fluid mx-auto o_we_custom_image" data-mimetype="image/webp" data-original-id="2500" data-original-src="{%static 'img/blank.webp'%}" data-mimetype-before-conversion="image/webp" data-resize-width="690" loading="lazy" style="">Nishant Kumpakha<br></h4></div>
+            </div>
   </div>
 </section><br><br>
 

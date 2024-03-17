@@ -90,6 +90,8 @@ differ
 different
 differently
 do
+document
+documents
 does
 done
 down
@@ -102,6 +104,8 @@ e
 each
 early
 either
+encompass
+encompasses
 end
 ended
 ending
@@ -208,7 +212,10 @@ largely
 last
 later
 latest
+law
+laws
 lawyer
+lawyers
 least
 less
 let
@@ -285,6 +292,8 @@ other
 others
 our
 out
+outline
+outlines    
 over
 p
 part

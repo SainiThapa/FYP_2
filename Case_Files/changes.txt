@@ -1,0 +1,3 @@
+1. Cosine similarity ranking
+2. Bootstrap offline
+3. UI Signup/Login

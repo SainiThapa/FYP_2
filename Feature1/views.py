@@ -82,6 +82,9 @@ def create_file(request):
         filedesc=request.POST.get("file_description")
         filetags=request.POST.get("filetags")
 
+        if filetitle =="" or filedesc=="" or filetags is None:
+            messages.error(request,"Unable to create file (Empty information cannot be uploaded)")
+            return redirect("/createfile")
         currentuser=request.user
         print(currentuser)
         user=Client.objects.get(user_id=currentuser.id)
@@ -107,36 +110,21 @@ def create_file(request):
                 # case_id.append(doc)
                 case = CASE.objects.get(id=doc)
                 related_lawyers = case.lawyer.user_id
-                lawyer_ids.append(related_lawyers)
-      
-    #   OLD ALGORITHM
-        # lawyer_dict = {}
-        
-        # for lawyer in Lawyer.objects.all():
-        #     lawyer_dict[lawyer.user_id] = lawyer.specialization_tags
+                lawyer_ids.append(related_lawyers)       
+        sorted_lawyers = Lawyer.objects.filter(user_id__in=lawyer_ids)
 
-
-        # lawyer_ids = []
-        # for search in filetags.split():
-        #     recommendations = get_recommendations(search, lawyer_dict)
-        #     print(recommendations)
-        #     for doc, similarity in recommendations:
-        #         if similarity > 0.45:
-        #             lawyer_ids.append(doc)
-                # break
-        filtered_lawyers = Lawyer.objects.filter(user_id__in=lawyer_ids)
-
-        if not filtered_lawyers:
-            lawyer_ids=[]
-            for case in cases:
-                if case.file.filetags==filetags:
-                    lawyer_ids.append(case.lawyer_id)
-            filtered_lawyers=Lawyer.objects.filter(user_id__in=lawyer_ids)
-            
-        sortedlawyers=sorted(filtered_lawyers,key=lambda x: x.ratings,reverse=True)
-        # for user in Client.objects.all():
-        #     if currentuser.username ==user.username:
-        return render(request,"client/recommended_lawyers.html",{'lawyers':sortedlawyers})
+        if not sorted_lawyers:
+            processed_list = preprocess(filetags)
+            lawyer_ids = []
+            for tag in processed_list:
+                lawyer = Lawyer.objects.filter(specialization_tags__icontains=tag)
+                for l in lawyer:
+                    lawyer_ids.append(l.user_id)
+                
+            filtered_lawyers = Lawyer.objects.filter(user_id__in=lawyer_ids)
+            sorted_lawyers=filtered_lawyers.order_by("-ratings")
+            print(sorted_lawyers)
+        return render(request,"client/recommended_lawyers.html",{'lawyers':sorted_lawyers})
     return render(request,"client/Create_file.html")
 
 
