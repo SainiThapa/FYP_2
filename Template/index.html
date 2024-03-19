@@ -112,15 +112,16 @@
       <div class="container">
           <div class="row align-items-center">
               <div class="col-lg-6 o_colored_level pb0 pt0">
-                  <a href="/log"><img src="{%static 'img/pic2.webp'%}" alt="" class="img img-fluid mx-auto o_we_custom_image o_animate_on_hover img-thumbnail" style="padding: 15px;" data-mimetype="image/svg+xml" data-original-id="2489" data-original-src="/web/image/2489-cd6adc50/pic2.webp" data-mimetype-before-conversion="image/webp" data-resize-width="690" data-shape="web_editor/geometric/geo_square" data-file-name="pic2.svg" data-hover-effect="image_zoom_in" data-shape-colors=";;;;" data-original-mimetype="image/webp" data-hover-effect-intensity="20" data-hover-effect-color="rgba(0, 0, 0, 0)"/></a>
+                  <a href="/lawyer_list"><img src="{%static 'img/pic2.webp'%}" alt="" class="img img-fluid mx-auto o_we_custom_image o_animate_on_hover img-thumbnail" style="padding: 15px;" data-mimetype="image/svg+xml" data-original-id="2489" data-original-src="/web/image/2489-cd6adc50/pic2.webp" data-mimetype-before-conversion="image/webp" data-resize-width="690" data-shape="web_editor/geometric/geo_square" data-file-name="pic2.svg" data-hover-effect="image_zoom_in" data-shape-colors=";;;;" data-original-mimetype="image/webp" data-hover-effect-intensity="20" data-hover-effect-color="rgba(0, 0, 0, 0)"/></a>
               </div>
               <div class="col-lg-6 pt16 pb16 o_colored_level">
                   <h2>Find the best lawyer for you<br/></h2>
                   <p>We provide the system to recommend you the best and most relevant lawyers and attorneys to you related to your specific information and reasoning.<br/></p>
-                  <p class="o_default_snippet_text">Log in to know and find more about the services.<br/></p>
+                  
       <p><br/></p>{%if user.is_authenticated%}
                   <p><a href="/lawyer_list" class="oe_edited_link btn btn-secondary" data-bs-original-title="" title="" aria-describedby="popover928516">Click Here</a><br/></p>
                   {%else%}
+                  <p class="o_default_snippet_text">Log in to know and find more about the services.<br/></p>
                   <p><a href="/signup" class="oe_edited_link btn btn-secondary" data-bs-original-title="" title="" aria-describedby="popover928516">Signup</a><br/></p>
                   {%endif%}
               </div>

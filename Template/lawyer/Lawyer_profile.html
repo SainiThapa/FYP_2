@@ -21,6 +21,11 @@
             max-width: 200px;
             border-radius: 50%;
         }
+        #star{
+
+          color:gold;
+          
+        }
     </style>
 </head>
 <body>
@@ -82,7 +87,7 @@
             <p><strong>Field of Expertise:</strong> {{data.specialization_tags}}</p>
             <h3>Profile Description:</h3>
             <p>{{data.profile_description}}</p>
-            <p>Rating: {{data.ratings}}<i class="fas fa-star rating-star" data-rating="1"></i></p>
+            <p>Rating: {{data.ratings}}<i id="star" class="fas fa-star rating-star" data-rating="1"></i></p>
             <p>Win-percentage : {{percentage}}%</p>
             
             <a href="connect"><input type="button" value="Connect"></a>

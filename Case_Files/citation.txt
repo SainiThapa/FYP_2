@@ -1,0 +1,36 @@
+    Type: Chapter (CHAP)
+    Authors: Catão, Marcos; Souza, Verônica
+    Year: 2023
+    Pages: 197
+    Chapter/Page Range: C12P89
+    ISBN: 0192897683
+    Title: International Tax Law and Corporate Law
+    DOI: 10.1093/oxfordhb/9780192897688.013.12
+
+
+
+Type  - Journal
+Author- Vahina, Iryna
+Published Year  - 2023/12/26
+Starting Page  - 78
+Ending Page  - 83
+Title  - Concepts and types of agreements between mother, father and children in family law
+DOI  - 10.61345/1339-7915.2023.4.14
+Journal Name  - Visegrad Journal on Human Rights
+
+
+    Type: Chapter (CHAP)
+    Authors: Walker, Lenore; Shapiro, David; Akl, Stephanie
+    Year: 2020
+    Pages: 139-153
+    ISBN: 978-3-030-44468-6
+    Title: Civil Law: U.S. Personal Injury Torts
+    DOI: 10.1007/978-3-030-44470-9_11
+
+
+    Type: Journal article (JOUR)
+    Authors: Ajmal, Ali; Niazi, Umair; Affiliation, Faiza
+    Year: 2023
+    Pages: 59-69
+    Title: Insanity Defense in Criminal Law in India: A Critical Analysis
+    Volume: 2

@@ -9,7 +9,8 @@
   
   <link rel="stylesheet" href="{%static 'css/bootstrap.css'%}">
   <script src="{%static 'js/bootstrap.min.bundle.js'%}"></script>
-  <!-- <script src="{%static 'fontawesome/js/all.min.js'%}"></script> -->
+  <link rel="stylesheet" href="{%static 'fontawesome/all.min.css'%}">
+  <script src="{%static 'fontawesome/js/all.min.js'%}"></script>
   
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <script src="https://kit.fontawesome.com/52c0f81a6f.js" crossorigin="anonymous"></script>
@@ -80,7 +81,7 @@
           <h5 class="card-text" style="margin-bottom: 0;"><i class="fas fa-user" style="padding-right: 10px; line-height: 2;"></i>{{lawyer.username}}</h5>
           <p class="card-text" style="margin-bottom: 5px;"><i class="fas fa-map-marker-alt" style="padding-right: 10px; line-height: 2;"></i>{{lawyer.location}}</p>
           <p class="card-text" style="margin-bottom: 5px;"><i class="fas fa-phone" style="padding-right: 5px; line-height: 2;"></i>+977-{{lawyer.phone}}</p>
-          <p class="card-text" style="margin-bottom: 5px; line-height: 2;"><i class="fas fa-star" data-rating="1"></i>  {{lawyer.ratings}}</p>
+          <p class="card-text" style="margin-bottom: 5px; line-height: 2;"><i id="star" class="fas fa-star" data-rating="1"></i>  {{lawyer.ratings}}</p>
           <p class="card-text" style="margin-bottom: 0;"><i class="fas fa-briefcase" style="padding-right: 10px; line-height: 2;"></i>{{lawyer.specialization_tags}}</p>
         </div>
       </div>
@@ -109,18 +110,12 @@
     margin-bottom: 5px;
   }
 
-  .rating-star {
-    font-size: 24px;
-    color: #ddd;
+  #star{
+    font-size: 20px;
+    color: gold;
     cursor: pointer;
     transition: color 0.25s;
   }
-
-  .rating-star:hover,
-  .rating-star.active {
-    color: gold;
-  }
-
 </style>
 
 
