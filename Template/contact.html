@@ -35,7 +35,7 @@
                   <a class="nav-link" href="/acceptedCases">Accepted Cases</a>
                 </li>
         {%endif%}
-        {%if not a%}
+        {%if user.is_authenticated and not a%}
                 <li class="nav-item">
                   <a class="nav-link" href="/Lawyer/connectClient">Client Request</a>
                 </li>
@@ -89,7 +89,8 @@
           <div class="row justify-content-center">
               <div class="col-md-6">
       
-                  <form action="#" method="post">
+                  <form action="/" method="post">
+                    {%csrf_token%}
       
                       <div class="form-group">
                           <label for="name">Name<span style="color:red">*</span></label>
