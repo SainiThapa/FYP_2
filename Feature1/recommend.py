@@ -1,6 +1,5 @@
 import math
 import re
-# from nltk.corpus import stopwords
 import numpy as np
 
 with open('C:/Users/Lenovo/Desktop/Lawyer/FYP/Lawyer/Feature1/stopwords.txt', 'r') as file:

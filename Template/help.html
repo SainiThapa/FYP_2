@@ -138,7 +138,9 @@
   </div>
   <div class="container text-lg-center">
       <p><br></p>
-      <a href="/log" data-bs-original-title="" title="">Discover all the features</a>
+      {%if not user.is_autheticated%}
+      <a href="/account/login" data-bs-original-title="" title="">Discover all the features</a>
+      {%endif%}
   </div>
 </section>
 

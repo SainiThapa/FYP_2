@@ -39,8 +39,8 @@ def contact(request):
         a=True
     return render(request, "contact.html", {'active': 'contact','a':a})
 
-def log(request):
-    return render(request,"log.html",{'active': 'log'})
+# def log(request):
+#     return render(request,"log.html",{'active': 'log'})
 
 def help(request):
     user=request.user
@@ -104,11 +104,11 @@ def create_file(request):
 
         # for search in newfileinfo:
         recommendations=get_recommendations(fileinfo, case_dict)
-        for doc, similarity in recommendations:
-            print(doc,similarity)
+        for file_id, similarity in recommendations:
+            print(file_id,similarity)
             if similarity>0.1:
                 # case_id.append(doc)
-                case = CASE.objects.get(id=doc)
+                case = CASE.objects.get(id=file_id)
                 related_lawyers = case.lawyer.user_id
                 lawyer_ids.append(related_lawyers)       
         sorted_lawyers = Lawyer.objects.filter(user_id__in=lawyer_ids)
@@ -123,7 +123,7 @@ def create_file(request):
                 
             filtered_lawyers = Lawyer.objects.filter(user_id__in=lawyer_ids)
             sorted_lawyers=filtered_lawyers.order_by("-ratings")
-            print(sorted_lawyers)
+        print(sorted_lawyers)
         return render(request,"client/recommended_lawyers.html",{'lawyers':sorted_lawyers})
     return render(request,"client/Create_file.html")
 
