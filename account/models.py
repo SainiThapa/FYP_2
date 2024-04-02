@@ -66,7 +66,7 @@ class File(models.Model):
     filetags=models.TextField()
 
     def __str__(self):
-        return f"{self.client.username} - {self.file_id} - {self.file_title}"
+        return f"{self.client.username} - {self.filetags} - {self.file_title}"
     
 
 class CASE(models.Model):
