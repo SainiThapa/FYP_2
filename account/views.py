@@ -88,7 +88,7 @@ def client_registration(request):
             else:
                 messages.info(request,"Password doesnot match !!")
                 return redirect('account/register/client')
-    return render(request,"client_registration.html")
+    return render(request,"client/client_registration.html")
     
 def lawyer_registration(request):
     if request.method=="POST":
