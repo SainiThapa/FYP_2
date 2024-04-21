@@ -104,6 +104,7 @@ def create_file(request):
 
         # for search in newfileinfo:
         recommendations=get_recommendations(fileinfo, case_dict)
+        lawyer_recommendations = {}
         for file_id, similarity in recommendations:
             print(file_id,similarity)
             if similarity>0.1:
@@ -111,8 +112,16 @@ def create_file(request):
                 case = CASE.objects.get(id=file_id)
                 related_lawyers = case.lawyer.user_id
                 lawyer_ids.append(related_lawyers)       
-        sorted_lawyers = Lawyer.objects.filter(user_id__in=lawyer_ids)
 
+                if related_lawyers not in lawyer_recommendations:
+                    lawyer_recommendations[related_lawyers]=(file_id,similarity)
+                else:
+                    _, current_similarity = lawyer_recommendations[related_lawyers]
+                    if similarity > current_similarity:
+                        lawyer_recommendations[related_lawyers,similarity]
+
+        sorted_lawyers = Lawyer.objects.filter(user_id__in=lawyer_ids)
+        print(lawyer_recommendations)
         if not sorted_lawyers:
             processed_list = preprocess(filetags)
             lawyer_ids = []
@@ -124,7 +133,7 @@ def create_file(request):
             filtered_lawyers = Lawyer.objects.filter(user_id__in=lawyer_ids)
             sorted_lawyers=filtered_lawyers.order_by("-ratings")
         print(sorted_lawyers)
-        return render(request,"client/recommended_lawyers.html",{'lawyers':sorted_lawyers})
+        return render(request,"client/recommended_lawyers.html",{'lawyers':sorted_lawyers,'lawyer_recommendations':lawyer_recommendations})
     return render(request,"client/Create_file.html")
 
 

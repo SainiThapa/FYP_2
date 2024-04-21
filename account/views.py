@@ -81,6 +81,11 @@ def client_registration(request):
                                 user.save()
                                 client=Client.objects.create(
                                      user=user, username=Clientname, email=email,password=password1,
+                    
+                    
+                    
+                    
+                    
                                       profile_picture=profile_picture,location=location,phone=phone)
                                 client.save()
                                 print('USER CREATED !')

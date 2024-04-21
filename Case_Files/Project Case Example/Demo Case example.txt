@@ -1,0 +1,53 @@
+Demo Case example
+
+1. Employment and Labour:
+ 	File title : Unpaid overtime and violation of Fair labor standard act
+	File description: Failure to pay overtime wages for hours worked beyond the standard workweek. Violation of the Fair Labor Standards Act (FLSA) provisions regarding overtime pay. 	Knowingly and willfully disregarding employee rights to fair compensation.
+
+2. Business and Corporate:
+	File title: Business Dissolution 
+	File Description: In preparation for the dissolution of our business entity, we have formulated a comprehensive plan to manage the liquidation process effectively. This plan includes thorough assessments of assets, formulation of dissolution resolutions, and proactive engagement with stakeholders to address concerns and ensure alignment with their interests. Our ultimate aim is to execute a dissolution strategy that prioritizes compliance with legal requirements, fosters stakeholder confidence, and facilitates a fair distribution of assets.
+
+3. Family:
+	File Title: Child Custody - Marriage Dissolution
+	File Description: The document outlines the proposed custody arrangements for children in the context of a marriage dissolution. It details the allocation of parental responsibilities, visitation schedules, and considerations for the well-being and best interests of the children involved.
+
+4. Intellectual Property:
+	File Title: Intellectual Property Infringement
+	File description:  This case file documents a legal dispute between Mr. Karki and our Tech Innovations regarding alleged infringement of intellectual property rights. It encompasses evidence of patent or copyright violations, examination of prior art, and discussions on potential damages or injunctions to protect our intellectual property.
+
+5. Entertainment:
+	File Title: Film Financing Agreement - Independent Film Production Financing Contract
+	File Description: This file encompasses our negotiation and execution of a film financing agreement with investors to fund an independent film production. It includes financing contracts, investment agreements, and communication with film financiers. Our goal is to secure financing for film production costs, ensure investor returns, and bring our creative vision to life on screen
+
+6. Real Estate:
+	File Title: Government Trespass in Real Estate
+	File Description: This case file concerns a legal action against the City Council for unauthorized entry onto private property without proper warrant or consent. It includes evidence of the government's trespass, discussions on property rights violations, and requests for remedies such as compensation for damages and injunctions to prevent future trespassing incidents.
+
+7. Tax:
+	File Title: Tax fraud defense case
+	File Description: In the legal matter, I am unjustly accused of tax fraud and strongly deny any wrongdoing. Through comprehensive documentation and expert testimony, I aim to demonstrate my full compliance with tax laws and refute the unfounded allegations put up against me, ensuring restoration of my reputation.
+
+8. Criminal Defense:
+	File Title: Defense Against Robbery Charges
+	File Description: I am building my defense strategy to counter the allegations of robbery leveled against me. My case file includes compelling evidence of my innocence, testimonies from witnesses corroborating my account, and expert analysis to challenge the prosecution's claims. My goal is to assert my innocence and secure a favorable verdict, ensuring that justice prevails in the face of wrongful accusations.
+
+
+9. Personal Injury:
+	File Title:  Car Accident Injury Lawsuit
+	File Description: As the plaintiff in a car accident injury lawsuit, I am seeking compensation for the damages I sustained due to the negligence of the other driver. This legal action aims to hold the responsible party accountable for the physical injuries, emotional distress, and financial losses I have endured as a result of the collision.
+
+10. Bankruptcy:
+	File Title: ABC Corporation Insolvency Declaration
+	File Description: This file includes a comprehensive overview of the corporation's financial status, assets, liabilities, and creditor claims. Additionally, the file documents the liquidation process, trustee appointments, creditor meetings, and court proceedings aimed at achieving a fair distribution of assets among creditors and facilitating the orderly dissolution of the corporation.
+
+11. Constitutional Law:
+
+	File Title: Freedom of Speech Lawsuit - First Amendment Rights lawsuit
+	File Description: This file documents our lawsuit asserting our First Amendment rights to freedom of speech against government censorship or restrictions. It includes legal complaints, constitutional law arguments, and evidence of speech suppression. Our goal is to challenge unconstitutional speech regulations, protect our expressive freedoms, and advocate for robust protection of free speech rights
+
+
+
+
+
+

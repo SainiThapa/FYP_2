@@ -17,6 +17,7 @@ urlpatterns=[
     path('Lawyer/<num>/',views.lawyer, name="num"),
     path('my_profile',views.my_profile,name="my_profile"),
     path('createfile',views.create_file,name="create_file"),
+    # path('recommended_lawyers',views.recommended_lawyers,name="recommended_lawyers"),
 
     path('Lawyer/<num>/connect',views.lawyerconnect, name="num"),
     
@@ -25,4 +26,5 @@ urlpatterns=[
     path('pastcases/',views.PastCases,name="PastCases"),
     path('acceptedCases/',views.acceptedCases,name="acceptedCases"),
     path('casestatus',views.casestatus,name="casestatus"),
+    # path('computation/<name>',views.computation, name="name"),
 ]

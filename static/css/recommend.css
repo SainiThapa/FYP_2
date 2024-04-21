@@ -24,7 +24,9 @@ div {
     box-sizing: border-box
 }
 
-
+.card-content-hidden{
+    display: none;
+}
 
 
 .bbb_viewed {
