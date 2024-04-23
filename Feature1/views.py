@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from account.models import CASE, Connection, File, Lawyer,User, Client
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .recommend import get_recommendations, preprocess
+from .recommend import clean_files, get_recommendations, preprocess
 # Create your views here.
 
 def handle_404(request, exception):
@@ -93,7 +93,8 @@ def create_file(request):
         
         fileinfo=filetitle+" " +filedesc
         case_dict={}
-        cases=CASE.objects.filter(case_approval=True,is_running=False,is_rated=True,case_status="VICTORY")
+        cases=CASE.objects.filter(case_approval=True,
+                                  is_running=False,is_rated=True,case_status="VICTORY")
         for case in cases:
                 if case.file.filetags==filetags:
                     case_dict[case.id]=case.case_title+" " +case.file.file_description
@@ -105,8 +106,9 @@ def create_file(request):
         # for search in newfileinfo:
         recommendations=get_recommendations(fileinfo, case_dict)
         lawyer_recommendations = {}
+
         for file_id, similarity in recommendations:
-            print(file_id,similarity)
+            print("file id: ",file_id,"   Cosine-Similarity value:",similarity)
             if similarity>0.1:
                 # case_id.append(doc)
                 case = CASE.objects.get(id=file_id)
@@ -119,9 +121,8 @@ def create_file(request):
                     _, current_similarity = lawyer_recommendations[related_lawyers]
                     if similarity > current_similarity:
                         lawyer_recommendations[related_lawyers,similarity]
-
+        print("File ID -> Similarity value:\n",lawyer_recommendations)
         sorted_lawyers = Lawyer.objects.filter(user_id__in=lawyer_ids)
-        print(lawyer_recommendations)
         if not sorted_lawyers:
             processed_list = preprocess(filetags)
             lawyer_ids = []
@@ -133,7 +134,7 @@ def create_file(request):
             filtered_lawyers = Lawyer.objects.filter(user_id__in=lawyer_ids)
             sorted_lawyers=filtered_lawyers.order_by("-ratings")
         print(sorted_lawyers)
-        return render(request,"client/recommended_lawyers.html",{'lawyers':sorted_lawyers,'lawyer_recommendations':lawyer_recommendations})
+        return render(request,"client/recommended_lawyers.html",{'lawyers':sorted_lawyers,'lawyer_recommendations':lawyer_recommendations,'cases':cases})
     return render(request,"client/Create_file.html")
 
 

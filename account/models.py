@@ -21,7 +21,7 @@ class Client(models.Model):
     phone = models.IntegerField(null=True)
 
     def __str__(self):
-        return self.username
+            return self.username
 
 
 class Lawyer(models.Model):

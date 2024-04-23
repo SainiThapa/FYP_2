@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf.urls.static import static
 from Lawyer import settings
-from Feature1.views import handle_404
+
 
 # from .  import account
 
@@ -27,5 +27,3 @@ urlpatterns = [
     path('',include('Feature1.urls')),
     path('account/', include('account.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-handler400 = handle_404

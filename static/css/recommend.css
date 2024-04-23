@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900|Rubik:300,400,500,700,900');
+/* @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900|Rubik:300,400,500,700,900');
 
 * {
     margin: 0;
@@ -22,10 +22,6 @@ div {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box
-}
-
-.card-content-hidden{
-    display: none;
 }
 
 
@@ -189,4 +185,10 @@ div {
 
 .bbb_viewed_item.is_new .item_new {
     display: inline-block
+}
+ */
+
+
+.card-content-hidden{
+    display: none;
 }
