@@ -60,7 +60,7 @@ def lawyer_list(request):
         if(lawyer.license_verify_status):
             approvedLawyer.append(lawyer)
     sortedlawyers=sorted(approvedLawyer,key=lambda x: x.ratings,reverse=True)
-    return render(request,"Lawyer/index-1.html",{"lawyers":sortedlawyers,'a':True})
+    return render(request,"lawyer/index-1.html",{"lawyers":sortedlawyers,'a':True})
 
 def lawyer(request,num):
     data=Lawyer.objects.get(user_id=num)

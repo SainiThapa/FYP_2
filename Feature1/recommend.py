@@ -2,7 +2,7 @@ import math
 import re
 import numpy as np
 
-with open('C:/Users/Lenovo/Desktop/Lawyer/FYP/Lawyer/Feature1/stopwords.txt', 'r') as file:
+with open('./Feature1/stopwords.txt', 'r') as file:
     stopwords = file.readlines()
 STOP_WORDS = [word.strip() for word in stopwords]
 
